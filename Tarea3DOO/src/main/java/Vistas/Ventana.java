@@ -11,7 +11,6 @@ public class Ventana extends JFrame {
 
         PanelPrincipal panelPrincipal = new PanelPrincipal();
         this.add(panelPrincipal, BorderLayout.CENTER);
-
         this.setVisible(true);
     }
 

@@ -3,6 +3,7 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Color;
 
+
 public class PanelPrincipal extends JPanel {
     private PanelComprador com;
     private PanelExpendedor exp;
@@ -14,5 +15,6 @@ public class PanelPrincipal extends JPanel {
         this.setBackground(Color.white);
         this.add(exp);
         this.add(com);
+
     }
 }
