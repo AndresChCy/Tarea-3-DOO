@@ -1,4 +1,4 @@
-package org.example;
+package Modelo;
 
 /**
  * Subclase que representa una moneda de valor 100.

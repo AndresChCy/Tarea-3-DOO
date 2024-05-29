@@ -1,4 +1,4 @@
-package org.example;
+package Modelo;
 
 /**
  * Subclase de Dulce que representa un Super8.

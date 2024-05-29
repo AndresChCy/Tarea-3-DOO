@@ -1,4 +1,4 @@
-package org.example;
+package Modelo;
 
 class Comprador {
     private String sonido;

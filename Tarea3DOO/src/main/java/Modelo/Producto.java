@@ -1,4 +1,4 @@
-package org.example;
+package Modelo;
 
 /**
  * Super-Superclase que conforma a todos los productos del programa.

@@ -1,4 +1,4 @@
-package org.example;
+package Modelo;
 
 /**
  * Superclase abstracta que representa una moneda.

@@ -1,4 +1,4 @@
-package org.example;
+package Modelo;
 
 /**
  * Excepcion especifica, es arrojada cuando se identifica que la moneda es nula.

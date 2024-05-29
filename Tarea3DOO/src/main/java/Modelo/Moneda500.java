@@ -1,22 +1,22 @@
-package org.example;
+package Modelo;
 
 /**
- * Subclase que representa una moneda de valor 1000.
+ * Subclase que representa una moneda de valor 500.
  * Extiende la clase abstracta Moneda.
  */
-class Moneda1000 extends Moneda{
-    /** Constructor por defecto de la clase Moneda1000.
+class Moneda500 extends Moneda{
+    /** Constructor por defecto de la clase Moneda500.
      * Llama al constructor de la superclase Moneda. */
-    public Moneda1000(){
+    public Moneda500(){
         super();
     }
 
     /**
      * Obtiene el valor de la moneda.
-     * @return El valor de la moneda, que en este caso es 1000.
+     * @return El valor de la moneda, que en este caso es 500.
      */
     public int getValor(){
-        return 1000;
+        return 500;
     }
 
     /**

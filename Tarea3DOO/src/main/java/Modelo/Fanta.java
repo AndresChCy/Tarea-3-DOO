@@ -1,4 +1,4 @@
-package org.example;
+package Modelo;
 
 /**
  * Subclase de Bebida que representa una Fanta.

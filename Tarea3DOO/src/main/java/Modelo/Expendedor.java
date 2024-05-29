@@ -1,5 +1,4 @@
-package org.example;
-import javax.swing.plaf.ProgressBarUI;
+package Modelo;
 
 /**
  * Un expendedor al que le puedes comprar productos usando monedas.

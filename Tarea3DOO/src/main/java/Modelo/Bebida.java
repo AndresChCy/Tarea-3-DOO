@@ -1,4 +1,4 @@
-package org.example;
+package Modelo;
 
 /**
  * Subclase abstracta de producto, representa un tipo de bebida.
