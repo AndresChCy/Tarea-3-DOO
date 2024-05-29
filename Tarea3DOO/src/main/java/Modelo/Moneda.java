@@ -4,15 +4,22 @@ package Modelo;
  * Superclase abstracta que representa una moneda.
  */
 abstract class Moneda implements Comparable<Integer>{
-    /** Constructor por defecto de la clase Moneda. */
-    public Moneda(){}
+    private int serie;
+
+    /**
+     * Constructor por defecto de la clase Moneda.
+     * @param NumSerie  Int que representa la serie de la moneda.
+     */
+    public Moneda(int NumSerie) {
+        this.serie = NumSerie;
+    }
 
     /**
      * Método para obtener la serie de la moneda.
-     * @return La instancia actual de la moneda.
+     * @return Int que representa la serie de la moneda.
      */
-    public Moneda getSerie(){
-        return this ;
+    public int getSerie(){
+        return serie;
     }
 
     /**

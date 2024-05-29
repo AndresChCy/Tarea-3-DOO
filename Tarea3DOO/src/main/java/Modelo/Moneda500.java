@@ -5,10 +5,12 @@ package Modelo;
  * Extiende la clase abstracta Moneda.
  */
 class Moneda500 extends Moneda{
-    /** Constructor por defecto de la clase Moneda500.
-     * Llama al constructor de la superclase Moneda. */
-    public Moneda500(){
-        super();
+    /**
+     * Método constructor de Moneda500 que permite asignarle un número de serie.
+     * @param NumSerie Número que representa la serie de la moneda.
+     */
+    public Moneda500(int NumSerie){
+        super(NumSerie);
     }
 
     /**
