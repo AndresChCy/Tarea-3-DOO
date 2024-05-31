@@ -9,18 +9,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class PanelDepositos extends JPanel {
-    private BufferedImage deposito;
+    private BufferedImage imagenDeposito;
     private ArrayList<BufferedImage> depositos;
 
     public PanelDepositos() {
         try {
-            deposito = ImageIO.read(getClass().getResource("/Depósito.png"));
+            imagenDeposito = ImageIO.read(getClass().getResource("/Depósito.png"));
         } catch (IOException ex) {
             System.out.println("Error al cargar imagen de depósito");
         }
         depositos = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            depositos.add(deposito);
+            depositos.add(imagenDeposito);
         }
     }
 
@@ -28,13 +28,13 @@ public class PanelDepositos extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        int panelWidth = getWidth();
-        int panelHeight = getHeight();
-        int depositoHeight = panelHeight / 5;
+        int anchoPanel = getWidth();
+        int altoPanel = getHeight();
+        int altoDeposito = altoPanel / 5;
 
         for (int i = 0; i < 5; i++) {
-            int y = i * depositoHeight;
-            g.drawImage(deposito.getScaledInstance(panelWidth, depositoHeight, Image.SCALE_SMOOTH), 0, y, this);
+            int y = i * altoDeposito;
+            g.drawImage(imagenDeposito.getScaledInstance(anchoPanel, altoDeposito, Image.SCALE_SMOOTH), 0, y, this);
         }
     }
 }

@@ -8,6 +8,8 @@ public class PanelExpendedor extends JPanel {
     private PanelMaquina2 panelMaquina2;
     private PanelDepositos panelDepositos;
     private PanelZonaExtraccion panelZonaExtraccion;
+    private Rectangle areaZonaExtraccion;
+
 
     public PanelExpendedor() {
         this.setBackground(new java.awt.Color(30, 120, 120));
@@ -30,38 +32,58 @@ public class PanelExpendedor extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        int panelWidth = getWidth();
-        int panelHeight = getHeight();
+        int anchoPanel = getWidth();
+        int altoPanel = getHeight();
 
-        int marginTop = 10;
-        int marginBottom = 25;
+        // Margen superior, inferior y a los lados
+        int margen = 10;
+        // Ancho de la línea divisoria entre las dos máquinas
+        int anchoDivisor = 1;
 
-        int totalHeight = panelHeight - marginTop - marginBottom;
-        int totalWidth = panelWidth - 20; // Ajuste para ambos paneles y la línea divisoria
-        int machineHeight = totalHeight;
-        int machineWidth1 = (int) (totalWidth * 0.6);
-        int machineWidth2 = (int) (totalWidth * 0.4);
-        int machineX1 = 10;
-        int machineX2 = machineX1 + machineWidth1 + 1; // +1 para la línea divisoria
-        int machineY = marginTop;
+        // Calcular el ancho disponible para las máquinas
+        int anchoDisponible = anchoPanel - (2 * margen) - anchoDivisor;
+        int anchoMaquina1 = anchoDisponible / 2;
+        int anchoMaquina2 = anchoDisponible / 2;
 
-        int ventanaWidth1 = machineWidth1 * 75 / 100;
-        int ventanaHeight1 = machineHeight * 70 / 100;
-        int ventanaX1 = (machineWidth1 - ventanaWidth1) / 2; // Centrado dentro de panelMaquina
-        int ventanaY1 = 20;
+        // Asegurarse de que la altura mantenga la relación de aspecto
+        double relacionAspecto = 0.45;
+        int altoMaximoMaquina = altoPanel - (2 * margen);
+        int altoMaquina = (int) (anchoMaquina1 / relacionAspecto);
 
-        int zonaExtraccionWidth1 = ventanaWidth1 * 90 / 100;
-        int zonaExtraccionHeight1 = machineHeight * 10 / 100;
-        int zonaExtraccionX1 = (machineWidth1 - zonaExtraccionWidth1) / 2; // Centrado dentro de panelMaquina
-        int zonaExtraccionY1 = machineHeight - zonaExtraccionHeight1 - 45;
+        if (altoMaquina > altoMaximoMaquina) {
+            altoMaquina = altoMaximoMaquina;
+            anchoMaquina1 = (int) (altoMaquina * relacionAspecto);
+            anchoMaquina2 = anchoMaquina1;
+        }
 
-        panelMaquina.setBounds(machineX1, machineY, machineWidth1, machineHeight);
-        panelMaquina2.setBounds(machineX2, machineY, machineWidth2, machineHeight);
-        panelDepositos.setBounds(ventanaX1, ventanaY1, ventanaWidth1, ventanaHeight1);
-        panelZonaExtraccion.setBounds(zonaExtraccionX1, zonaExtraccionY1, zonaExtraccionWidth1, zonaExtraccionHeight1);
+        // Calcular las posiciones horizontales para centrar el expendedor
+        int anchoTotal = anchoMaquina1 + anchoDivisor + anchoMaquina2;
+        int inicioX = (anchoPanel - anchoTotal) / 2;
+        int maquinaX1 = inicioX;
+        int maquinaX2 = maquinaX1 + anchoMaquina1 + anchoDivisor;
+        int maquinaY = margen;
+
+        // Dimensiones y posiciones de los componentes internos
+        int anchoVentana1 = anchoMaquina1 * 75 / 100;
+        int altoVentana1 = altoMaquina * 70 / 100;
+        int ventanaX1 = (anchoMaquina1 - anchoVentana1) / 2;
+        int ventanaY1 = maquinaY + 20;
+
+        int anchoZonaExtraccion = anchoVentana1 * 90 / 100;
+        int altoZonaExtraccion = altoMaquina * 10 / 100;
+        int zonaExtraccionX = (anchoMaquina1 - anchoZonaExtraccion) / 2;
+        int zonaExtraccionY = maquinaY + altoMaquina - altoZonaExtraccion - 45;
+
+        areaZonaExtraccion = new Rectangle(zonaExtraccionX, zonaExtraccionY, anchoZonaExtraccion, altoZonaExtraccion);
+
+        // Establecer los límites de los paneles
+        panelMaquina.setBounds(maquinaX1, maquinaY, anchoMaquina1, altoMaquina);
+        panelMaquina2.setBounds(maquinaX2, maquinaY, anchoMaquina2, altoMaquina);
+        panelDepositos.setBounds(ventanaX1, ventanaY1, anchoVentana1, altoVentana1);
+        panelZonaExtraccion.setBounds(zonaExtraccionX, zonaExtraccionY, anchoZonaExtraccion, altoZonaExtraccion);
 
         // Dibujar la línea divisoria
         g.setColor(Color.BLACK);
-        g.drawLine(machineX1 + machineWidth1, machineY, machineX1 + machineWidth1, machineY + machineHeight);
+        g.drawLine(maquinaX1 + anchoMaquina1, maquinaY, maquinaX1 + anchoMaquina1, maquinaY + altoMaquina);
     }
 }

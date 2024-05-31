@@ -1,6 +1,5 @@
 package Vistas;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
 public class Ventana extends JFrame {

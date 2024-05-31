@@ -8,11 +8,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class PanelMaquina extends JPanel {
-    private BufferedImage maquinaFondo;
+    private BufferedImage imagenFondoMaquina;
 
     public PanelMaquina() {
         try {
-            maquinaFondo = ImageIO.read(getClass().getResource("/Máquina_Fondo.png"));
+            imagenFondoMaquina = ImageIO.read(getClass().getResource("/Máquina_Fondo.png"));
         } catch (IOException ex) {
             System.out.println("Error al cargar imagen de fondo de la máquina");
         }
@@ -21,10 +21,10 @@ public class PanelMaquina extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (maquinaFondo != null) {
-            int panelWidth = getWidth();
-            int panelHeight = getHeight();
-            g.drawImage(maquinaFondo.getScaledInstance(panelWidth, panelHeight, Image.SCALE_SMOOTH), 0, 0, this);
+        if (imagenFondoMaquina != null) {
+            int anchoPanel = getWidth();
+            int altoPanel = getHeight();
+            g.drawImage(imagenFondoMaquina.getScaledInstance(anchoPanel, altoPanel, Image.SCALE_SMOOTH), 0, 0, this);
         }
     }
 }

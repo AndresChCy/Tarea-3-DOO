@@ -10,15 +10,15 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class PanelZonaExtraccion extends JPanel {
-    private BufferedImage maquinaCerrada;
-    private BufferedImage maquinaAbierta;
-    private BufferedImage maquinaActual;
+    private BufferedImage imagenMaquinaCerrada;
+    private BufferedImage imagenMaquinaAbierta;
+    private BufferedImage imagenMaquinaActual;
 
     public PanelZonaExtraccion() {
         try {
-            maquinaCerrada = ImageIO.read(getClass().getResource("/Máquina_Cerrada.png"));
-            maquinaAbierta = ImageIO.read(getClass().getResource("/Máquina_Abierta.png"));
-            maquinaActual = maquinaCerrada;
+            imagenMaquinaCerrada = ImageIO.read(getClass().getResource("/Máquina_Cerrada.png"));
+            imagenMaquinaAbierta = ImageIO.read(getClass().getResource("/Máquina_Abierta.png"));
+            imagenMaquinaActual = imagenMaquinaCerrada;
         } catch (IOException ex) {
             System.out.println("Error al cargar imagen de zona de extracción");
         }
@@ -26,7 +26,7 @@ public class PanelZonaExtraccion extends JPanel {
         addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
-                maquinaActual = maquinaAbierta;
+                imagenMaquinaActual = imagenMaquinaAbierta;
                 repaint();
             }
         });
@@ -34,7 +34,7 @@ public class PanelZonaExtraccion extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                maquinaActual = maquinaCerrada;
+                imagenMaquinaActual = imagenMaquinaCerrada;
                 repaint();
             }
         });
@@ -43,8 +43,8 @@ public class PanelZonaExtraccion extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        int panelWidth = getWidth();
-        int panelHeight = getHeight();
-        g.drawImage(maquinaActual.getScaledInstance(panelWidth, panelHeight, Image.SCALE_SMOOTH), 0, 0, this);
+        int anchoPanel = getWidth();
+        int altoPanel = getHeight();
+        g.drawImage(imagenMaquinaActual.getScaledInstance(anchoPanel, altoPanel, Image.SCALE_SMOOTH), 0, 0, this);
     }
 }
