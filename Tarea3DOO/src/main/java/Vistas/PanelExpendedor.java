@@ -1,49 +1,29 @@
 package Vistas;
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class PanelExpendedor extends JPanel {
-    private BufferedImage maquinaCerrada;
-    private BufferedImage maquinaAbierta;
-    private BufferedImage maquinaActual;
-    private BufferedImage deposito;
-
-    private ArrayList<Rectangle> areaDepositos = new ArrayList<>();
-    private Rectangle areaZonaExtraccion;
+    private PanelMaquina panelMaquina;
+    private PanelMaquina2 panelMaquina2;
+    private PanelDepositos panelDepositos;
+    private PanelZonaExtraccion panelZonaExtraccion;
 
     public PanelExpendedor() {
-        // Establecer el color de fondo del panel
         this.setBackground(new java.awt.Color(30, 120, 120));
-        try {
-            // Cargar las imágenes de la máquina cerrada, abierta y del depósito
-            maquinaCerrada = ImageIO.read(getClass().getResource("/Máquina_Cerrada.png"));
-            maquinaAbierta = ImageIO.read(getClass().getResource("/Máquina_Abierta.png"));
-            maquinaActual = maquinaCerrada;
-            deposito = ImageIO.read(getClass().getResource("/Depósito.png"));
-        } catch (IOException ex) {
-            System.out.println("Error al cargar imagen");
-        }
+        this.setLayout(null);
 
-        // Agregar un listener para el movimiento del ratón
-        this.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                int x = e.getX();
-                int y = e.getY();
-                if (areaZonaExtraccion != null && areaZonaExtraccion.contains(x, y)) {
-                    maquinaActual = maquinaAbierta;
-                } else {
-                    maquinaActual = maquinaCerrada;
-                }
-                repaint();
-            }
-        });
+        panelMaquina = new PanelMaquina();
+        panelMaquina2 = new PanelMaquina2();
+        panelDepositos = new PanelDepositos();
+        panelZonaExtraccion = new PanelZonaExtraccion();
+
+        panelMaquina.setLayout(null);
+        panelMaquina.add(panelDepositos);
+        panelMaquina.add(panelZonaExtraccion);
+
+        this.add(panelMaquina);
+        this.add(panelMaquina2);
     }
 
     @Override
@@ -53,55 +33,35 @@ public class PanelExpendedor extends JPanel {
         int panelWidth = getWidth();
         int panelHeight = getHeight();
 
-        // Márgenes
-        int marginTop = 30;
-        int marginBottom = 50;
-        int totalMargin = marginTop + marginBottom;
+        int marginTop = 10;
+        int marginBottom = 25;
 
-        // Proporciones de la máquina
-        int maquinaHeight = panelHeight - totalMargin;
-        int maquinaWidth = panelWidth * 70 / 100; // reducir el ancho para dejar espacio a la derecha
-        int maquinaX = 10; // ligeramente desplazado hacia la izquierda
-        int maquinaY = marginTop;
+        int totalHeight = panelHeight - marginTop - marginBottom;
+        int totalWidth = panelWidth - 20; // Ajuste para ambos paneles y la línea divisoria
+        int machineHeight = totalHeight;
+        int machineWidth1 = (int) (totalWidth * 0.6);
+        int machineWidth2 = (int) (totalWidth * 0.4);
+        int machineX1 = 10;
+        int machineX2 = machineX1 + machineWidth1 + 1; // +1 para la línea divisoria
+        int machineY = marginTop;
 
-        // Proporciones de los depósitos
-        int ventanaWidth = maquinaWidth * 75 / 100;
-        int ventanaHeight = maquinaHeight * 70 / 100;
-        int ventanaX = maquinaX + (maquinaWidth - ventanaWidth) / 2;
-        int ventanaY = maquinaY + 20;
+        int ventanaWidth1 = machineWidth1 * 75 / 100;
+        int ventanaHeight1 = machineHeight * 70 / 100;
+        int ventanaX1 = (machineWidth1 - ventanaWidth1) / 2; // Centrado dentro de panelMaquina
+        int ventanaY1 = 20;
 
-        int depositoWidth = ventanaWidth;
-        int depositoHeight = ventanaHeight / 5;
+        int zonaExtraccionWidth1 = ventanaWidth1 * 90 / 100;
+        int zonaExtraccionHeight1 = machineHeight * 10 / 100;
+        int zonaExtraccionX1 = (machineWidth1 - zonaExtraccionWidth1) / 2; // Centrado dentro de panelMaquina
+        int zonaExtraccionY1 = machineHeight - zonaExtraccionHeight1 - 45;
 
-        areaDepositos.clear();
-        for (int i = 0; i < 5; i++) {
-            int depositoX = ventanaX;
-            int depositoY = ventanaY + i * depositoHeight;
-            areaDepositos.add(new Rectangle(depositoX, depositoY, depositoWidth, depositoHeight));
-        }
+        panelMaquina.setBounds(machineX1, machineY, machineWidth1, machineHeight);
+        panelMaquina2.setBounds(machineX2, machineY, machineWidth2, machineHeight);
+        panelDepositos.setBounds(ventanaX1, ventanaY1, ventanaWidth1, ventanaHeight1);
+        panelZonaExtraccion.setBounds(zonaExtraccionX1, zonaExtraccionY1, zonaExtraccionWidth1, zonaExtraccionHeight1);
 
-        // Proporciones del área de extracción
-        int zonaExtraccionWidth = ventanaWidth * 90 / 100;
-        int zonaExtraccionHeight = maquinaHeight * 10 / 100;
-        int zonaExtraccionX = maquinaX + (maquinaWidth - zonaExtraccionWidth) / 2;
-        int zonaExtraccionY = maquinaY + maquinaHeight - zonaExtraccionHeight - 45;
-
-        areaZonaExtraccion = new Rectangle(zonaExtraccionX, zonaExtraccionY, zonaExtraccionWidth, zonaExtraccionHeight);
-
-        // Dibujar el fondo de la máquina
-        g.setColor(new java.awt.Color(180, 30, 30));
-        g.fillRect(maquinaX, maquinaY, maquinaWidth, maquinaHeight);
-
-        // Dibujar los depósitos
-        for (Rectangle areaDeposito : areaDepositos) {
-            if (deposito != null) {
-                g.drawImage(deposito.getScaledInstance(areaDeposito.width, areaDeposito.height, Image.SCALE_SMOOTH), areaDeposito.x, areaDeposito.y, this);
-            }
-        }
-
-        // Dibujar el estado actual del área de extracción
-        if (maquinaActual != null) {
-            g.drawImage(maquinaActual.getScaledInstance(zonaExtraccionWidth, zonaExtraccionHeight, Image.SCALE_SMOOTH), zonaExtraccionX, zonaExtraccionY, this);
-        }
+        // Dibujar la línea divisoria
+        g.setColor(Color.BLACK);
+        g.drawLine(machineX1 + machineWidth1, machineY, machineX1 + machineWidth1, machineY + machineHeight);
     }
 }
