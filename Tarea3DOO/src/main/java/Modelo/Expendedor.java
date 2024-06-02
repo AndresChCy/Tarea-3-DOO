@@ -13,6 +13,7 @@ class Expendedor {
 
     /** Metodo constructor que rellena sus depositos para productos de forma magica */
     public Expendedor(int NumProductos) {
+        DepositoMonedasUnico = new Deposito<>();
         DepositoVuelto = new Deposito<>();
         depositos = new ArrayList[CaracteristicasProducto.values().length];
         for (CaracteristicasProducto Producto : CaracteristicasProducto.values()) {
