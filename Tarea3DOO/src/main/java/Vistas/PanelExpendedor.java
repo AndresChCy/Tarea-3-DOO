@@ -2,22 +2,21 @@ package Vistas;
 
 import javax.swing.*;
 import java.awt.*;
+import Modelo.Expendedor;
 
 public class PanelExpendedor extends JPanel {
     private PanelMaquina panelMaquina;
     private PanelMaquina2 panelMaquina2;
     private PanelDepositos panelDepositos;
     private PanelZonaExtraccion panelZonaExtraccion;
-    private Rectangle areaZonaExtraccion;
 
-
-    public PanelExpendedor() {
+    public PanelExpendedor(Expendedor expendedor) {
         this.setBackground(new java.awt.Color(30, 120, 120));
         this.setLayout(null);
 
         panelMaquina = new PanelMaquina();
         panelMaquina2 = new PanelMaquina2();
-        panelDepositos = new PanelDepositos();
+        panelDepositos = new PanelDepositos(expendedor);
         panelZonaExtraccion = new PanelZonaExtraccion();
 
         panelMaquina.setLayout(null);
@@ -73,8 +72,6 @@ public class PanelExpendedor extends JPanel {
         int altoZonaExtraccion = altoMaquina * 10 / 100;
         int zonaExtraccionX = (anchoMaquina1 - anchoZonaExtraccion) / 2;
         int zonaExtraccionY = maquinaY + altoMaquina - altoZonaExtraccion - 45;
-
-        areaZonaExtraccion = new Rectangle(zonaExtraccionX, zonaExtraccionY, anchoZonaExtraccion, altoZonaExtraccion);
 
         // Establecer los límites de los paneles
         panelMaquina.setBounds(maquinaX1, maquinaY, anchoMaquina1, altoMaquina);
