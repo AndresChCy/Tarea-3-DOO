@@ -3,14 +3,15 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Color;
 
+
 public class PanelExpendedor extends JPanel {
     public PanelExpendedor() {
         this.setBackground(Color.gray);
         this.setBounds(0, 0, 450, 560); // Posición y tamaño del panel
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
+
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         // Dibujo del expendedor y sus componentes
         g.setColor(Color.blue);

@@ -30,4 +30,9 @@ public class PanelPrincipal extends JPanel {
         this.add(com, gbc);
 
     }
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        com.paintComponent(g);
+        exp.paintComponent(g);
+    }
 }
