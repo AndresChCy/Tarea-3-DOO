@@ -51,6 +51,9 @@ class Expendedor {
                 Moneda m = DepositoPago.get(i);
                 DepositoVuelto.addObject(m);
             }
+            for (int i=0 ; i<DepositoPago.size() ; i++ ) {
+                DepositoPago.remove(i);
+            }
             throw new NoHayProductoException("No tenemos este producto.");
         }
 
@@ -64,6 +67,9 @@ class Expendedor {
                 Moneda m = DepositoPago.get(i);
                 DepositoVuelto.addObject(m);
             }
+            for (int i=0 ; i<DepositoPago.size() ; i++ ) {
+                DepositoPago.remove(i);
+            }
             throw new PagoInsuficienteException("Pago Insuficiente.");
         }
 
@@ -71,6 +77,9 @@ class Expendedor {
             for (int i=0 ; i<DepositoPago.size() ; i++ ) {
                 Moneda m = DepositoPago.get(i);
                 DepositoVuelto.addObject(m);
+            }
+            for (int i=0 ; i<DepositoPago.size() ; i++ ) {
+                DepositoPago.remove(i);
             }
             throw new NoHayProductoException("Lo sentimos, no hay stock de este producto en este momento.");
         }
