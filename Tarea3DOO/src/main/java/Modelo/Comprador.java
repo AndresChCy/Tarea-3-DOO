@@ -1,19 +1,49 @@
 package Modelo;
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * Clase que representa un comprador.
  */
 class Comprador {
     private Object[] Mano;
+    private ArrayList<Moneda> Bolsillo;
     private String sonido;
     private int vuelto;
 
     /**
-     * Constructor de la clase que instancia la mano.
+     * Constructor de la clase que instancia todas las variables.
      */
     public Comprador() {
         Mano = new Object[1];
+        Bolsillo = new ArrayList<>();
+        sonido = null;
+        vuelto = 0;
+    }
+
+    /**
+     * Método add que añade monedas al bolsillo,
+     * @param m     Moneda que se desea meter al bolsillo.
+     */
+    public void addMonedaBolsillo(Moneda m) {
+        if ( Bolsillo.size()<10 ) {
+            Bolsillo.add(m);
+        } else {
+            System.out.println("No se puede seleccionar más monedas.");
+        }
+    }
+
+    /**
+     * Método get que saca una moneda del bolsillo.
+     * @param numero        Posición de la moneda que se busca.
+     * @throws Exception    Excepción de SetMonedaMano.
+     */
+    public void getMonedaBolsillo(int numero) throws Exception {
+        if ( numero<10 && numero>=0 ) {
+            SetMonedaMano(Bolsillo.get(numero));
+            Bolsillo.remove(numero);
+        } else {
+            System.out.println("No se puede escoger un posición que no existe.");
+        }
     }
 
     /**
@@ -39,19 +69,8 @@ class Comprador {
      * @throws NoHayProductoException       Excepción para cuando no hay productos.
      */
     public void Comprar(CaracteristicasProducto CualProducto, Expendedor exp) throws Exception, PagoIncorrectoException, PagoInsuficienteException, NoHayProductoException {
-        vuelto = 0;
-        Moneda m;
-
-        try {
-            m = (Moneda) Mano[0];
-            Mano[0] = null;
-        } catch ( Exception e) {
-            throw new Exception("Error, ha intentado comprar con algo que no es una moneda.");
-        }
-
-        exp.comprarProducto(m, CualProducto);
+        exp.comprarProducto(CualProducto);
         Mano[0] = exp.getProducto();
-
 
         Moneda m2 = exp.getVuelto();
         while(m2 != null){
@@ -61,11 +80,23 @@ class Comprador {
     }
 
     /**
+     * Método para que el comprador pague.
+     * @param exp           Expendedor al que se le va a pagar.
+     * @throws Exception    Excepción cuando no se paga con una moneda.
+     */
+    public void Pagar(Expendedor exp) throws Exception {
+        try {
+            exp.Pagar((Moneda) Mano[0]);
+        } catch ( Exception e) {
+            throw new Exception("No tienes una moneda en la mano.");
+        }
+    }
+
+    /**
      * Método que sirve para consumir el producto que se encuentra en la mano.
      * @throws Exception    Excepción para cuando se intenta consumir algo que no es un producto.
      */
     public void ConsumirDeLaMano() throws Exception {
-        sonido = null;
         try {
             sonido = ((Producto) Mano[0]).consumirlo();
             Mano[0] = null;

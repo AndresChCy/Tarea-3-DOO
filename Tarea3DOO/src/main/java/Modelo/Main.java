@@ -11,6 +11,7 @@ public class Main {
         try {
             juan = new Comprador();
             juan.SetMonedaMano(m);
+            juan.Pagar(exp);
             juan.Comprar(CaracteristicasProducto.FANTA, exp);
             juan.ConsumirDeLaMano();
             System.out.println(juan.queConsumiste() + " " + juan.cuantoVuelto());
@@ -18,6 +19,7 @@ public class Main {
             m = new Moneda1000(2);
             juan = new Comprador();
             juan.SetMonedaMano(m);
+            juan.Pagar(exp);
             juan.Comprar(CaracteristicasProducto.FANTA, exp);
             juan.ConsumirDeLaMano();
             System.out.println(juan.queConsumiste() + " " + juan.cuantoVuelto());
