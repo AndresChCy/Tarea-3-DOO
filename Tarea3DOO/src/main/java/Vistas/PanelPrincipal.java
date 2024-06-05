@@ -1,4 +1,6 @@
 package Vistas;
+import Modelo.Comprador;
+
 import javax.swing.JPanel;
 import java.awt.*;
 
@@ -13,9 +15,10 @@ public class PanelPrincipal extends JPanel {
         gbc.fill = GridBagConstraints.BOTH; // Permitir que los componentes se expandan
         gbc.weightx = 1.0; // Permitir expansión horizontal
         gbc.weighty = 1.0; // Permitir expansión vertical
+        Comprador comprador = new Comprador();
 
         exp = new PanelExpendedor();
-        com = new PanelComprador();
+        com = new PanelComprador(comprador);
 
         this.setBackground(Color.white);
 

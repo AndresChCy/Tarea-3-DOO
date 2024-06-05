@@ -1,4 +1,5 @@
 package Modelo;
+import java.util.AbstractList;
 import java.util.ArrayList;
 
 /**
@@ -119,5 +120,12 @@ public class Comprador {
      */
     public String queConsumiste(){
         return sonido;
+    }
+    public ArrayList<Moneda> getBolsillo(){
+        return Bolsillo;
+
+    }
+    public Object[] getMano(){
+        return Mano;
     }
 }

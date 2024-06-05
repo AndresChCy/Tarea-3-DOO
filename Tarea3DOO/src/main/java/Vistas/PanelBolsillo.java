@@ -1,21 +1,35 @@
 package Vistas;
 
+import Modelo.Comprador;
+import Modelo.Moneda;
+import Modelo.Moneda100;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Graphics;
 
 public class PanelBolsillo extends JPanel {
-    public PanelBolsillo(){
+    Comprador comprador;
+    private PanelSlot[] slots;
+    public PanelBolsillo(Comprador comprador){
         this.setLayout(new GridLayout(5,2));
-        JLabel[] slot = new PanelSlot[10];
+        slots = new PanelSlot[10];
+        this.comprador = comprador;
         for (int i = 0 ; i<10;i++){
-            slot[i] = new PanelSlot(new ImageIcon(getClass().getResource("/SlotBolsillo.png")));
-            this.add(slot[i]);
+            slots[i] = new PanelSlot();
+            this.add(slots[i]);
         }
 
     }
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        Moneda m = null;
+        for (int i = 0 ; i<10;i++){
+            if(i < comprador.getBolsillo().size() )  m = comprador.getBolsillo().get(i);
+            slots[i].setContiene(m);
+            m = null;
+        }
+
     }
 }

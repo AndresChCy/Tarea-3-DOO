@@ -3,7 +3,7 @@ package Modelo;
 /**
  * Subclase de Bebida que representa una Sprite.
  */
-class Sprite extends Bebida {
+public class Sprite extends Bebida {
     /**
      * Método constructor de Sprite que permite asignarle un número de serie.
      * @param NumSerie Número que representa la serie del producto.

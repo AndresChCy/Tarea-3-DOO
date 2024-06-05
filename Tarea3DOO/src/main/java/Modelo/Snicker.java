@@ -3,7 +3,7 @@ package Modelo;
 /**
  * Subclase de Dulce que representa un Snicker.
  */
-class Snicker extends Dulce {
+public class Snicker extends Dulce {
     /**
      * Método constructor de Snicker que permite asignarle un número de serie.
      * @param NumSerie Número que representa la serie del producto.

@@ -3,7 +3,7 @@ package Modelo;
 /**
  * Subclase de Dulce que representa un Super8.
  */
-class Super8 extends Dulce {
+public class Super8 extends Dulce {
     /**
      * Método constructor de Super8 que permite asignarle un número de serie.
      * @param NumSerie Número que representa la serie del producto.

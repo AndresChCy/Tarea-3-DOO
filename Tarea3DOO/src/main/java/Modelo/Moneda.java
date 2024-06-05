@@ -3,7 +3,7 @@ package Modelo;
 /**
  * Superclase abstracta que representa una moneda.
  */
-abstract class Moneda implements Comparable<Integer>{
+abstract public class Moneda implements Comparable<Integer>{
     private int serie;
 
     /**
