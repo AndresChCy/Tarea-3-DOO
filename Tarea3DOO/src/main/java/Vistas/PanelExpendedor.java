@@ -83,7 +83,7 @@ public class PanelExpendedor extends JPanel {
         int anchoZonaExtraccion = anchoVentana1 * 90 / 100;
         int altoZonaExtraccion = altoMaquina * 10 / 100;
         int zonaExtraccionX = (anchoMaquina1 - anchoZonaExtraccion) / 2;
-        int zonaExtraccionY = maquinaY + altoMaquina - altoZonaExtraccion - 45;
+        int zonaExtraccionY = maquinaY + altoMaquina - altoZonaExtraccion - altoMaquina * 10 / 100;
 
         // Establecer los límites de los componentes
         panelMaquina.setBounds(maquinaX1, maquinaY, anchoMaquina1, altoMaquina);
