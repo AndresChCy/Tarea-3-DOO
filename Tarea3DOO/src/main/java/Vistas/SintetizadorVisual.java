@@ -32,18 +32,18 @@ public class SintetizadorVisual {
     }
     public static CaracteristicasProducto ObtenerEleccion(int i){
         switch(i){
-            case 1:
+            case 0:
                 return CaracteristicasProducto.FANTA;
-            case 2:
+            case 1:
                 return CaracteristicasProducto.SPRITE;
 
-            case 3:
+            case 2:
                 return CaracteristicasProducto.COCACOLA;
 
-            case 4:
+            case 3:
                 return CaracteristicasProducto.SNICKERS;
 
-            case 5:
+            case 4:
                 return CaracteristicasProducto.SUPER8;
 
         }

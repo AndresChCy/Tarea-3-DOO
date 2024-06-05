@@ -39,7 +39,9 @@ public class PanelComprador extends JPanel {
         try{
             ImageIcon i = SintetizadorVisual.ObtenerImagen(comprador.getMano()[0]);
             Mano.setIcon(i);
-        }catch (Exception e){}
+        }catch (Exception e){
+            Mano.setIcon(null);
+        }
 
     }
 }

@@ -1,7 +1,6 @@
 package Vistas;
 
-import Modelo.CaracteristicasProducto;
-import Modelo.Expendedor;
+import Modelo.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -99,25 +98,9 @@ public class PanelBotones extends JPanel {
                 botonesArray[i] = boton;
                 add(boton);
                 if (i < 5) {
-                    final CaracteristicasProducto precioProducto = CaracteristicasProducto.valueOf(nombreBoton.toUpperCase());
-                    boton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            String mensaje = logicaBotones.verificarProducto(precioProducto);
-                            panelMensajes.actualizarMensaje(mensaje);
-                        }
-                    });
+                    boton.addActionListener(new ElegirProducto(i));
                 } else { // Botón "Comprar"
-                    boton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (expendedor.getCantidadDepositoExpecial() == 0) {
-                                // Se toman las monedas y se realiza la compra en Expendedor
-                            } else {
-                                panelMensajes.actualizarMensaje("Favor retirar producto\nantes de comprar otro.");
-                            }
-                        }
-                    });
+                    boton.addActionListener(new ConfirmarPago());
                 }
             }
         }
@@ -152,15 +135,28 @@ public class PanelBotones extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             cualProducto = cual;
+            String mensaje = logicaBotones.verificarProducto(cual);
+            panelMensajes.actualizarMensaje(mensaje);
         }
+    }
 
         private class ConfirmarPago implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    expendedor.comprarProducto(cualProducto);
-                } catch (Exception ex) {
+                if (expendedor.getCantidadDepositoExpecial() == 0) {
+                    try{
+                        expendedor.comprarProducto(cualProducto);
+                    } catch (NoHayProductoException ex) {
+                        panelMensajes.actualizarMensaje("Producto no disponible :(");
+                    } catch (PagoInsuficienteException ex) {
+                        panelMensajes.actualizarMensaje("Pago insuficiente." +
+                                " \n Por favor retire su dinero.");
+                    } catch (PagoIncorrectoException ex) {
+                        panelMensajes.actualizarMensaje("Ingrese monedas para pagar.");
+                    }
+                } else {
+                    panelMensajes.actualizarMensaje("Favor retirar producto\nantes de comprar otro.");
                 }
             }
         }
-    }}
+    }

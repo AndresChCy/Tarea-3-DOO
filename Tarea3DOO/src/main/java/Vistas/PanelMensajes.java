@@ -28,6 +28,9 @@ public class PanelMensajes extends JPanel {
         this.mensaje = nuevoMensaje;
         repaint();
     }
+    public String getMensaje(){
+        return this.mensaje;
+    }
 
     /**
      * Sobrescribe el método paintComponent para personalizar la renderización del componente.
