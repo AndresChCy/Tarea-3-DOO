@@ -1,5 +1,6 @@
 package Vistas;
 
+
 import javax.swing.*;
 import java.awt.*;
 import Modelo.Expendedor;
@@ -46,7 +47,7 @@ public class PanelExpendedor extends JPanel {
      * @param g El contexto gráfico en el que se dibujan los componentes.
      */
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         // Obtener las dimensiones del panel

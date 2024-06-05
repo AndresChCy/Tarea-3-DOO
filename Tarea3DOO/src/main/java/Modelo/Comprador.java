@@ -1,10 +1,11 @@
 package Modelo;
+import java.util.AbstractList;
 import java.util.ArrayList;
 
 /**
  * Clase que representa un comprador.
  */
-class Comprador {
+public class Comprador {
     private Object[] Mano;
     private ArrayList<Moneda> Bolsillo;
     private String sonido;
@@ -119,5 +120,12 @@ class Comprador {
      */
     public String queConsumiste(){
         return sonido;
+    }
+    public ArrayList<Moneda> getBolsillo(){
+        return Bolsillo;
+
+    }
+    public Object[] getMano(){
+        return Mano;
     }
 }

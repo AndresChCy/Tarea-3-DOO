@@ -4,7 +4,7 @@ package Modelo;
  * Subclase que representa una moneda de valor 1000.
  * Extiende la clase abstracta Moneda.
  */
-class Moneda1000 extends Moneda{
+public class Moneda1000 extends Moneda{
     /**
      * Método constructor de Moneda1000 que permite asignarle un número de serie.
      * @param NumSerie Número que representa la serie de la moneda.
