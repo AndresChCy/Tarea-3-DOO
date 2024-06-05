@@ -1,5 +1,7 @@
 package Vistas;
 
+import Modelo.Expendedor;
+
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.Graphics;
@@ -16,12 +18,13 @@ import java.awt.event.ComponentEvent;
 public class PanelMaquina2 extends JPanel {
     private BufferedImage imagenFondoMaquina2;
     private PanelBotones panelBotones;
+    private PanelMensajes panelMensajes;
 
     /**
      * Constructor de la clase PanelMaquina2.
      * Inicializa el panel, carga la imagen de fondo de la segunda máquina y agrega el panel de botones.
      */
-    public PanelMaquina2() {
+    public PanelMaquina2(Expendedor expendedor) {
         try {
             // Cargar la imagen de fondo de la segunda máquina
             imagenFondoMaquina2 = ImageIO.read(getClass().getResource("/Máquina_Fondo_2.png"));
@@ -32,8 +35,12 @@ public class PanelMaquina2 extends JPanel {
 
         setLayout(null); // Usar un diseño nulo para posicionar manualmente los componentes
 
+        //Crear y agregar el panel de los mensajes
+        panelMensajes = new PanelMensajes();
+        this.add(panelMensajes);
+
         // Crear y agregar el panel de botones
-        panelBotones = new PanelBotones();
+        panelBotones = new PanelBotones(expendedor, panelMensajes);
         this.add(panelBotones);
 
         // Añadir un ComponentListener para actualizar la posición y el tamaño de panelBotones al cambiar el tamaño del panel
@@ -47,6 +54,7 @@ public class PanelMaquina2 extends JPanel {
 
     /**
      * Método sobrescrito para dibujar la imagen de fondo de la segunda máquina en el panel.
+     *
      * @param g El contexto gráfico en el que se dibuja la imagen.
      */
     @Override
@@ -61,6 +69,9 @@ public class PanelMaquina2 extends JPanel {
 
         // Ajustar el tamaño y la posición de panelBotones
         ajustarPanelBotones();
+
+        // Ajustar el tamaño y la posición de panelMensajes
+        ajustarPanelMensajes();
     }
 
     /**
@@ -77,13 +88,31 @@ public class PanelMaquina2 extends JPanel {
 
         // Calcular las posiciones y dimensiones de PanelBotones
         int anchoBotones = anchoPanel - 2 * margenX;
-        int altoBotones = altoPanel - (altoPanel / 2) - margenYArriba - margenYAbajo;
+        int altoBotones = (altoPanel / 2) - margenYArriba - margenYAbajo;
         int xBotones = margenX;
-        int yBotones = altoPanel / 2 - margenYArriba;
+        int yBotones = altoPanel / 2 - margenYArriba - margenYAbajo;
 
         // Establecer los límites del panel de botones
         panelBotones.setBounds(xBotones, yBotones, anchoBotones, altoBotones);
         panelBotones.revalidate();
         panelBotones.repaint();
+    }
+
+    private void ajustarPanelMensajes() {
+        int anchoPanel = getWidth();
+        int altoPanel = getHeight();
+
+        // Calcular los márgenes proporcionales al tamaño del panel
+        int margenMensajesX = (int) (anchoPanel * 0.05); // Margen de 5% del ancho del panel
+        int margenMensajesY = (int) (altoPanel * 0.025); // Margen de 2.5% del alto del panel
+
+        // Calcular las posiciones y dimensiones de PanelMensajes
+        int anchoMensajes = anchoPanel - 2 * margenMensajesX;
+        int altoMensajes = altoPanel / 3 - 2 * margenMensajesY;
+        int xMensajes = margenMensajesX;
+        int yMensajes = margenMensajesY;
+
+        //Establecer límites del panel de los mensajes
+        panelMensajes.setBounds(xMensajes, yMensajes, anchoMensajes, altoMensajes);
     }
 }

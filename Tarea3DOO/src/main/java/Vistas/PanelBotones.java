@@ -1,8 +1,13 @@
 package Vistas;
 
+import Modelo.CaracteristicasProducto;
+import Modelo.Expendedor;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,17 +21,26 @@ import java.awt.event.ComponentEvent;
  */
 public class PanelBotones extends JPanel {
     private Map<String, BufferedImage> imagenesBotones;
-    private String[] botones = {"Fanta", "Sprite", "CocaCola", "Snickers", "Super8", "Cancelar"};
+    private String[] botones = {"Fanta", "Sprite", "CocaCola", "Snickers", "Super8", "Check"};
     private JButton[] botonesArray;
+    private PanelMensajes panelMensajes;
+    private LogicaBotones logicaBotones;
+    private Expendedor expendedor;
 
     /**
      * Constructor de la clase PanelBotones.
      * Inicializa el panel, carga las imágenes de los productos y configura el diseño del panel.
      */
-    public PanelBotones() {
+    public PanelBotones(Expendedor expendedor, PanelMensajes panelMensajes) {
+        this.expendedor = expendedor;
+
         // Inicializa el mapa de imágenes
         imagenesBotones = new HashMap<>();
         botonesArray = new JButton[6];
+
+        // Inicializa el panel de los mensajes
+        this.panelMensajes = panelMensajes;
+        logicaBotones = new LogicaBotones(expendedor);
 
         try {
             // Cargar las imágenes de los productos y almacenarlas en el mapa
@@ -35,7 +49,7 @@ public class PanelBotones extends JPanel {
             imagenesBotones.put("CocaCola", ImageIO.read(getClass().getResource("/Logo_CocaCola.png")));
             imagenesBotones.put("Snickers", ImageIO.read(getClass().getResource("/Logo_Snickers.png")));
             imagenesBotones.put("Super8", ImageIO.read(getClass().getResource("/Logo_Super8.png")));
-            imagenesBotones.put("Cancelar", ImageIO.read(getClass().getResource("/Cancelar.png")));
+            imagenesBotones.put("Check", ImageIO.read(getClass().getResource("/Check.png")));
         } catch (IOException ex) {
             // Manejar cualquier error de carga de imágenes
             System.out.println("Error al cargar imágenes: " + ex.getMessage());
@@ -67,6 +81,27 @@ public class PanelBotones extends JPanel {
                 JButton boton = new JButton();
                 botonesArray[i] = boton;
                 add(boton);
+                if (i < 5) {
+                    final CaracteristicasProducto precioProducto = CaracteristicasProducto.valueOf(nombreBoton.toUpperCase());
+                    boton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            String mensaje = logicaBotones.verificarProducto(precioProducto);
+                            panelMensajes.actualizarMensaje(mensaje);
+                        }
+                    });
+                } else { // Botón "Comprar"
+                    boton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            if (expendedor.getCantidadDepositoExpecial() == 0) {
+                                // Se toman las monedas y se realiza la compra en Expendedor
+                            } else {
+                                panelMensajes.actualizarMensaje("Favor retirar producto\nantes de comprar otro.");
+                            }
+                        }
+                    });
+                }
             }
         }
     }

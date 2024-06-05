@@ -126,14 +126,12 @@ public class Expendedor {
         }
         return 0;
     }
-
-    /** Método para obtener un producto específico sin removerlo */
-    public Producto getProducto(int index, int position) {
-        if (index >= 0 && index < depositos.length) {
-            if (position >= 0 && position < depositos[index].size()) {
-                return depositos[index].get(position);
-            }
+    /** Método para saber si hay un producto en DepositoEspecial */
+    public int getCantidadDepositoExpecial() {
+        if (DepositoEspecial != null) {
+            return 0;
+        } else {
+            return 1;
         }
-        return null;
     }
 }
