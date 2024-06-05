@@ -11,7 +11,7 @@ public class PanelComprador extends JPanel {
     private Comprador comprador;
     JPanel Usuario;
     JLabel Comprador;
-    JPanel Bolsillo;
+    PanelBolsillo Bolsillo;
     JLabel Mano;
 
     public PanelComprador(Comprador comprador) {
@@ -19,9 +19,9 @@ public class PanelComprador extends JPanel {
         this.setBackground(Color.green);
         this.setBounds(350, 0, 350, 560);
         this.setLayout(new BorderLayout());
-        Usuario = new PanelUsuario();
         Comprador = new JLabel(new ImageIcon(getClass().getResource("/Comprador.png")));
-        Bolsillo = new PanelBolsillo(comprador);
+        Bolsillo = new PanelBolsillo(comprador,this);
+        Usuario = new PanelUsuario(comprador, Bolsillo);
         Usuario.setPreferredSize(new Dimension(0,150));
         Mano = new JLabel();
 
@@ -36,12 +36,10 @@ public class PanelComprador extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        try {
-            comprador.SetMonedaMano(new Moneda1500(1));
-        } catch (Exception e){}
-        //ImageIcon i = new ImageIcon(getClass().getResource(DibujadorDeObjetos.ObtenerImagen(comprador.getMano()[0])));
-        ImageIcon i = SintetizadorVisual.ObtenerImagen(comprador.getMano()[0]);
-        Mano.setIcon(i);
+        try{
+            ImageIcon i = SintetizadorVisual.ObtenerImagen(comprador.getMano()[0]);
+            Mano.setIcon(i);
+        }catch (Exception e){}
 
     }
 }

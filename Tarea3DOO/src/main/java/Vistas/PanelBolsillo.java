@@ -11,12 +11,12 @@ import java.awt.Graphics;
 public class PanelBolsillo extends JPanel {
     Comprador comprador;
     private PanelSlot[] slots;
-    public PanelBolsillo(Comprador comprador){
+    public PanelBolsillo(Comprador comprador,PanelComprador panel){
         this.setLayout(new GridLayout(5,2));
         slots = new PanelSlot[10];
         this.comprador = comprador;
         for (int i = 0 ; i<10;i++){
-            slots[i] = new PanelSlot();
+            slots[i] = new PanelSlot(comprador,i,panel);
             this.add(slots[i]);
         }
 
