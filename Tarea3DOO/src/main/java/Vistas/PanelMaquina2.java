@@ -1,5 +1,7 @@
 package Vistas;
 
+import Modelo.Expendedor;
+
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.Graphics;
@@ -16,12 +18,14 @@ import java.awt.event.ComponentEvent;
 public class PanelMaquina2 extends JPanel {
     private BufferedImage imagenFondoMaquina2;
     private PanelBotones panelBotones;
+    private Expendedor expendedor;
 
     /**
      * Constructor de la clase PanelMaquina2.
      * Inicializa el panel, carga la imagen de fondo de la segunda máquina y agrega el panel de botones.
      */
-    public PanelMaquina2() {
+    public PanelMaquina2(Expendedor expendedor) {
+        this.expendedor = expendedor;
         try {
             // Cargar la imagen de fondo de la segunda máquina
             imagenFondoMaquina2 = ImageIO.read(getClass().getResource("/Máquina_Fondo_2.png"));
@@ -33,7 +37,7 @@ public class PanelMaquina2 extends JPanel {
         setLayout(null); // Usar un diseño nulo para posicionar manualmente los componentes
 
         // Crear y agregar el panel de botones
-        panelBotones = new PanelBotones();
+        panelBotones = new PanelBotones(expendedor);
         this.add(panelBotones);
 
         // Añadir un ComponentListener para actualizar la posición y el tamaño de panelBotones al cambiar el tamaño del panel

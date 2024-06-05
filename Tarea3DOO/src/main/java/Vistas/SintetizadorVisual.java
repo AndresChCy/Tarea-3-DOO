@@ -25,5 +25,24 @@ public class SintetizadorVisual {
         ImageIcon imagen= new ImageIcon(SintetizadorVisual.class.getResource(aux));
         return imagen;
     }
+    public static CaracteristicasProducto ObtenerEleccion(int i){
+        switch(i){
+            case 1:
+                return CaracteristicasProducto.FANTA;
+            case 2:
+                return CaracteristicasProducto.SPRITE;
+
+            case 3:
+                return CaracteristicasProducto.COCACOLA;
+
+            case 4:
+                return CaracteristicasProducto.SNICKERS;
+
+            case 5:
+                return CaracteristicasProducto.SUPER8;
+
+        }
+        return null;
+    }
 
 }

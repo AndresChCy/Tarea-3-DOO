@@ -13,6 +13,7 @@ public class PanelExpendedor extends JPanel {
     private PanelMaquina2 panelMaquina2;
     private PanelDepositos panelDepositos;
     private PanelZonaExtraccion panelZonaExtraccion;
+    private Expendedor expendedor;
 
     /**
      * Constructor de la clase PanelExpendedor.
@@ -20,6 +21,7 @@ public class PanelExpendedor extends JPanel {
      * @param expendedor El Expendedor asociado al panel.
      */
     public PanelExpendedor(Expendedor expendedor) {
+        this.expendedor = expendedor;
         // Establecer el color de fondo del panel
         this.setBackground(new java.awt.Color(30, 120, 120));
         // Configurar el diseño del panel como null para permitir un diseño personalizado
@@ -27,7 +29,7 @@ public class PanelExpendedor extends JPanel {
 
         // Inicializar los componentes de la interfaz gráfica del expendedor
         panelMaquina = new PanelMaquina();
-        panelMaquina2 = new PanelMaquina2();
+        panelMaquina2 = new PanelMaquina2(expendedor);
         panelDepositos = new PanelDepositos(expendedor);
         panelZonaExtraccion = new PanelZonaExtraccion();
 
