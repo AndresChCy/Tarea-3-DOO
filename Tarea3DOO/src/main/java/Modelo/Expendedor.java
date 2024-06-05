@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * Un expendedor al que le puedes comprar productos usando monedas.
  */
-class Expendedor {
+public class Expendedor {
     /** Creamos una lista de depositos, un deposito para monedas, un deposito unico y un deposito especial*/
     private ArrayList<Producto>[] depositos;
     private ArrayList<Moneda> DepositoPago;
@@ -112,6 +112,26 @@ class Expendedor {
             return DepositoEspecial;
         } else {
             return null;
+        }
+    }
+    /** Método para obtener los depósitos de productos */
+    public ArrayList<Producto>[] getDepositos() {
+        return depositos;
+    }
+
+    /** Método para obtener la cantidad de productos en un depósito específico */
+    public int getCantidadProductos(int index) {
+        if (index >= 0 && index < depositos.length) {
+            return depositos[index].size();
+        }
+        return 0;
+    }
+    /** Método para saber si hay un producto en DepositoEspecial */
+    public int getCantidadDepositoExpecial() {
+        if (DepositoEspecial != null) {
+            return 0;
+        } else {
+            return 1;
         }
     }
 }
