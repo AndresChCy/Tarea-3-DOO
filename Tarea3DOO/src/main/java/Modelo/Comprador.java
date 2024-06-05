@@ -71,7 +71,6 @@ public class Comprador {
      */
     public void Comprar(CaracteristicasProducto CualProducto, Expendedor exp) throws Exception, PagoIncorrectoException, PagoInsuficienteException, NoHayProductoException {
         exp.comprarProducto(CualProducto);
-        Mano[0] = exp.getProducto();
 
         Moneda m2 = exp.getVuelto();
         while(m2 != null){
@@ -91,6 +90,14 @@ public class Comprador {
         } catch ( Exception e) {
             throw new Exception("No tienes una moneda en la mano.");
         }
+    }
+
+    /**
+     * Método para sacar producto del deposito especial.
+     * @param exp     Expendedor del cual se ha comprado.
+     */
+    public void agarrarProducto(Expendedor exp) {
+        Mano[0] = exp.getProducto();
     }
 
     /**

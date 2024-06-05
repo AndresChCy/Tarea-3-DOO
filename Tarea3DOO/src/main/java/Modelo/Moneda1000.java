@@ -22,6 +22,15 @@ public class Moneda1000 extends Moneda{
     }
 
     /**
+     * Método toString de moneda.
+     * @return  Información de moneda.
+     */
+    @Override
+    public String toString() {
+        return "Moneda: "+this.getValor()+" "+"Serie: "+this.getSerie();
+    }
+
+    /**
      * Método para comparar el valor de la moneda con un precio dado.
      * @param valor El precio a comparar.
      * @return La diferencia entre la moneda y el precio del prducto comprado, cuyo valor

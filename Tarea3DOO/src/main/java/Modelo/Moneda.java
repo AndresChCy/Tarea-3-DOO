@@ -23,6 +23,12 @@ abstract public class Moneda implements Comparable<Integer>{
     }
 
     /**
+     * Método abstracto para obtener información de moneda.
+     * @return  Información de moneda.
+     */
+   public abstract String toString();
+
+    /**
      * Método abstracto para obtener el valor de la moneda.
      * @return El valor de la moneda.
      */
