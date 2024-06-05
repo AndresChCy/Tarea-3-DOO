@@ -134,4 +134,9 @@ public class Expendedor {
             return 1;
         }
     }
+    public Producto RetirarProducto(){
+        Producto p = this.DepositoEspecial;
+        this.DepositoEspecial = null;
+        return p;
+    }
 }

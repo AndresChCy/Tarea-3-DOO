@@ -142,30 +142,25 @@ public class PanelBotones extends JPanel {
             }
         }
     }
-    private class ElegirProducto implements MouseListener {
+    private class ElegirProducto implements ActionListener {
         private CaracteristicasProducto cual;
-        public ElegirProducto(int cual){
+
+        public ElegirProducto(int cual) {
             this.cual = SintetizadorVisual.ObtenerEleccion(cual);
         }
+
         @Override
-        public void mouseClicked(MouseEvent e) {
-            cualProducto= cual;
+        public void actionPerformed(ActionEvent e) {
+            cualProducto = cual;
         }
-        public void mousePressed(MouseEvent e) {}
-        public void mouseReleased(MouseEvent e) {}
-        public void mouseEntered(MouseEvent e) {}
-        public void mouseExited(MouseEvent e) {}
-    }
-    private class ConfirmarPago implements MouseListener{
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            try {
-                expendedor.comprarProducto(cualProducto);
-            }catch (Exception ex){}
+
+        private class ConfirmarPago implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    expendedor.comprarProducto(cualProducto);
+                } catch (Exception ex) {
+                }
+            }
         }
-        public void mousePressed(MouseEvent e) {}
-        public void mouseReleased(MouseEvent e) {}
-        public void mouseEntered(MouseEvent e) {}
-        public void mouseExited(MouseEvent e) {}
-    }
-}
+    }}

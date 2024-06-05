@@ -3,7 +3,8 @@ package Vistas;
 
 import javax.swing.*;
 import java.awt.*;
-import Modelo.Expendedor;
+
+import Modelo.*;
 
 /**
  * La clase PanelExpendedor representa el panel que contiene la interfaz gráfica del expendedor.
@@ -20,7 +21,7 @@ public class PanelExpendedor extends JPanel {
      * Inicializa los componentes de la interfaz gráfica del expendedor.
      * @param expendedor El Expendedor asociado al panel.
      */
-    public PanelExpendedor(Expendedor expendedor) {
+    public PanelExpendedor(Expendedor expendedor, Comprador comprador,PanelComprador com) {
         this.expendedor = expendedor;
         // Establecer el color de fondo del panel
         this.setBackground(new java.awt.Color(30, 120, 120));
@@ -31,7 +32,7 @@ public class PanelExpendedor extends JPanel {
         panelMaquina = new PanelMaquina();
         panelMaquina2 = new PanelMaquina2(expendedor);
         panelDepositos = new PanelDepositos(expendedor);
-        panelZonaExtraccion = new PanelZonaExtraccion();
+        panelZonaExtraccion = new PanelZonaExtraccion(comprador, expendedor,com);
 
         // Configurar el diseño del panel interno de la máquina como null para permitir un diseño personalizado
         panelMaquina.setLayout(null);

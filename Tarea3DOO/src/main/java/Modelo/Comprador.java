@@ -97,7 +97,9 @@ public class Comprador {
      * @param exp     Expendedor del cual se ha comprado.
      */
     public void agarrarProducto(Expendedor exp) {
-        Mano[0] = exp.getProducto();
+        if(Mano[0]==null){
+            Mano[0] = exp.RetirarProducto();
+        }
     }
 
     /**

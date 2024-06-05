@@ -17,10 +17,15 @@ public class SintetizadorVisual {
         } else if (o instanceof Moneda1500) {
             aux = "/Moneda1500.png";
         } else if (o instanceof Snicker) {
+            aux = "/Snickers.png";
         } else if (o instanceof Sprite) {
+            aux = "/Sprite.png";
         } else if (o instanceof Super8) {
+            aux = "/Super8.png";
         } else if (o instanceof CocaCola) {
+            aux = "/CocaCola.png";
         } else if (o instanceof Fanta) {
+            aux = "/Fanta.png";
         }
         ImageIcon imagen= new ImageIcon(SintetizadorVisual.class.getResource(aux));
         return imagen;

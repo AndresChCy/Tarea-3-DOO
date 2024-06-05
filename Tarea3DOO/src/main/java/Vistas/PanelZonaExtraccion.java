@@ -1,7 +1,10 @@
 package Vistas;
 
+import Modelo.Comprador;
+import Modelo.Expendedor;
+
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -23,7 +26,7 @@ public class PanelZonaExtraccion extends JPanel {
      * Inicializa el panel y carga las imágenes de la máquina abierta y cerrada.
      * Agrega listeners para manejar los eventos de movimiento y salida del ratón.
      */
-    public PanelZonaExtraccion() {
+    public PanelZonaExtraccion(Comprador comprador, Expendedor expendedor,PanelComprador com) {
         try {
             // Cargar las imágenes de la máquina abierta y cerrada
             imagenMaquinaCerrada = ImageIO.read(getClass().getResource("/Máquina_Cerrada.png"));
@@ -34,12 +37,19 @@ public class PanelZonaExtraccion extends JPanel {
             // Manejar cualquier error de carga de imagen
             System.out.println("Error al cargar imagen de zona de extracción: " + ex.getMessage());
         }
+        JLabel producto = new JLabel()  ;
+        add(producto);
 
         // Agregar un listener para manejar el movimiento del ratón
         addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
                 // Cambiar la imagen de la máquina a abierta cuando el ratón se mueve sobre el panel
+                try{
+                    producto.setIcon(SintetizadorVisual.ObtenerImagen(expendedor.getProducto()));
+                }catch(NullPointerException ex){
+                    producto.setIcon(null);
+                }
                 imagenMaquinaActual = imagenMaquinaAbierta;
                 repaint(); // Volver a pintar el panel
             }
@@ -50,8 +60,18 @@ public class PanelZonaExtraccion extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
                 // Cambiar la imagen de la máquina a cerrada cuando el ratón sale del panel
+                producto.setIcon(null);
                 imagenMaquinaActual = imagenMaquinaCerrada;
                 repaint(); // Volver a pintar el panel
+            }
+        });
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                comprador.agarrarProducto(expendedor);
+                producto.setIcon(null);
+                repaint();
+                com.repaint();
             }
         });
     }
