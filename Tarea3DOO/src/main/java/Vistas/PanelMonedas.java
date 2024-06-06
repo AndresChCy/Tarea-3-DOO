@@ -17,6 +17,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Interfaz grafica para regalar monedas al comprador
+ */
 public class PanelMonedas extends JPanel {
     private String[] nombresMonedas = {"Moneda100", "Moneda500", "Moneda1000", "Moneda1500"};
     private Map<String, BufferedImage> imagenesMonedas;

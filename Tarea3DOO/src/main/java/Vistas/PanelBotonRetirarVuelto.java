@@ -2,6 +2,7 @@ package Vistas;
 
 import Modelo.Comprador;
 import Modelo.Expendedor;
+import Modelo.Moneda;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,9 +24,14 @@ public class PanelBotonRetirarVuelto extends JButton {
 
         // Agregar un ActionListener para manejar el evento de clic
         addActionListener(e -> {
-            comprador.addMonedaBolsillo(expendedor.getVuelto());
+            Moneda m = expendedor.getVuelto();
+            comprador.addMonedaBolsillo(m);
             panelC.repaint();
-            panelMensajes.actualizarMensaje("Test2");
+            panelMensajes.actualizarMensaje("Recuerde retirar todas\nsus monedas");
+            try {
+                System.out.println("Se retiro una moneda :" + m.toString());
+            }catch (NullPointerException ex){}
+            ;
         });
     }
 

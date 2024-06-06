@@ -7,9 +7,17 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+/**
+ * Clase que representa la zona grafica de la mano de un comprador
+ */
 public class PanelMano extends JPanel {
     private Comprador comprador;
     private JLabel Mano;
+
+    /**
+     * Grafica el producto que tenga la mano
+     * @param comprador comprador al que le veremoos la mano
+     */
     public PanelMano(Comprador comprador) {
         this.comprador = comprador;
         Mano = new JLabel();
@@ -35,6 +43,8 @@ public class PanelMano extends JPanel {
             Mano.setIcon(null);
         }
     }
+
+
     private void actualizarIcono(PanelMano boton, Image imagen) {
         if (imagen != null) {
             int anchoBoton = boton.getWidth();

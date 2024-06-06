@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * Imagen del comprador
+ */
 public class PanelPersona extends JPanel {
     private BufferedImage imagenPersona;
     private PanelMano panelMano;

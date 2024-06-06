@@ -20,7 +20,7 @@ public class PanelPrincipal extends JPanel {
      */
     public PanelPrincipal() {
         // Inicializar el expendedor con una capacidad predeterminada de 4 productos
-        expendedor = new Expendedor(1);
+        expendedor = new Expendedor(3);
 
         // Configurar el diseño del panel principal como GridBagLayout
         setLayout(new GridBagLayout());

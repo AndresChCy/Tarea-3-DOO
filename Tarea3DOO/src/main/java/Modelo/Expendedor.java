@@ -91,7 +91,7 @@ public class Expendedor {
         }
 
         for (int i=0; i<ValorTotal-(cualProducto.getPrecio()); i+=100) {
-            DepositoVuelto.addObject(new Moneda100(10+i));
+            DepositoVuelto.addObject(new Moneda100(1000+i));
         }
 
         int j = cualProducto.ordinal();

@@ -66,6 +66,13 @@ public class SintetizadorVisual {
         }
         return null;
     }
+
+    /**
+     * metodo para verificar que queden productos y generar un aviso
+     * @param producto producto a verificar
+     * @param expendedor expendedor sobre el que se trabaja
+     * @return un String con la informacion que se requiere
+     */
     public static String verificarProducto(CaracteristicasProducto producto, Expendedor expendedor) {
         if (expendedor.getCantidadProductos(producto.ordinal()) > 0) {
             return "Precio:\n$" + producto.getPrecio();

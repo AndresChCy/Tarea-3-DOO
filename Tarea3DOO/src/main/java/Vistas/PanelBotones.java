@@ -28,7 +28,7 @@ public class PanelBotones extends JPanel {
     private JButton[] botonesArray;
     private CaracteristicasProducto cualProducto;
     private PanelMensajes panelMensajes;
-    private LogicaBotones logicaBotones;
+
     private Expendedor expendedor;
     private PanelExpendedor exp;
 
@@ -46,7 +46,6 @@ public class PanelBotones extends JPanel {
 
         // Inicializa el panel de los mensajes
         this.panelMensajes = panelMensajes;
-        logicaBotones = new LogicaBotones(expendedor);
 
 
         try {
@@ -117,37 +116,52 @@ public class PanelBotones extends JPanel {
         }
     }
 
+    /**
+     * Clase privada especial para definir botones que se usan para elegir Productos
+     */
+
     private class ElegirProducto implements ActionListener {
         private CaracteristicasProducto cual;
 
+        /**
+         * define que producto se asociara al boton
+         * @param cual el producto
+         */
         public ElegirProducto(int cual) {
             this.cual = SintetizadorVisual.ObtenerEleccion(cual);
         }
 
+        /**
+         * guarda el producto que sea clickedo para tenerlo de opcion al ser comprado
+         * @param e the event to be processed
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             cualProducto = cual;
-            String mensaje = logicaBotones.verificarProducto(cual);
+            String mensaje = SintetizadorVisual.verificarProducto(cual,expendedor);
             panelMensajes.actualizarMensaje(mensaje );
         }
     }
 
-        private class ConfirmarPago implements ActionListener {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (expendedor.getCantidadDepositoExpecial() == 0) {
-                    try{
-                        expendedor.comprarProducto(cualProducto);
-                        panelMensajes.actualizarMensaje("Compra exitosa! \n Retire el producto");
-                        exp.repaint();
-                    } catch (NoHayProductoException ex) {
-                        panelMensajes.actualizarMensaje("Producto no disponible :(");
-                    } catch (PagoInsuficienteException ex) {
-                        panelMensajes.actualizarMensaje("Pago insuficiente." +
-                                " \n Por favor retire su dinero.");
-                    } catch (PagoIncorrectoException ex) {
-                        panelMensajes.actualizarMensaje("Ingrese monedas para pagar.");
-                    }
+    /**
+     * Clase privada para definir el boton que se usara para confirmar la compra
+     */
+    private class ConfirmarPago implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (expendedor.getCantidadDepositoExpecial() == 0) {
+                try{
+                    expendedor.comprarProducto(cualProducto);
+                    panelMensajes.actualizarMensaje("Compra exitosa! \n Retire el producto");
+                    exp.repaint();
+                } catch (NoHayProductoException ex) {
+                    panelMensajes.actualizarMensaje("Producto no disponible :(");
+                } catch (PagoInsuficienteException ex) {
+                    panelMensajes.actualizarMensaje("Pago insuficiente." +
+                            " \n Por favor retire su dinero.");
+                } catch (PagoIncorrectoException ex) {
+                    panelMensajes.actualizarMensaje("Ingrese monedas para pagar.");
+                }
                 } else {
                     panelMensajes.actualizarMensaje("Favor retirar producto\nantes de comprar otro.");
                 }
