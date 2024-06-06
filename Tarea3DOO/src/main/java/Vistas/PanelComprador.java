@@ -8,40 +8,51 @@ import Modelo.Moneda1500;
 import java.awt.Graphics;
 
 public class PanelComprador extends JPanel {
-    private Comprador comprador;
-    JPanel Usuario;
-    JLabel Comprador;
-    JPanel Bolsillo;
-    JLabel Mano;
+    private PanelUsuario panelUsuario;
+    private PanelBolsillo panelBolsillo;
+    private PanelPersona panelPersona;
 
     public PanelComprador(Comprador comprador) {
-        this.comprador = comprador;
+
         this.setBackground(Color.green);
-        this.setBounds(350, 0, 350, 560);
-        this.setLayout(new BorderLayout());
-        Usuario = new PanelUsuario();
-        Comprador = new JLabel(new ImageIcon(getClass().getResource("/Comprador.png")));
-        Bolsillo = new PanelBolsillo(comprador);
-        Usuario.setPreferredSize(new Dimension(0,150));
-        Mano = new JLabel();
+        this.setLayout(null);
 
-        this.add(Comprador, BorderLayout.CENTER);
-        this.add(Usuario,BorderLayout.SOUTH);
-        this.add(Bolsillo,BorderLayout.EAST );
-        this.add(Mano,BorderLayout.WEST);
-        
+        panelBolsillo = new PanelBolsillo(comprador);
+        panelUsuario = new PanelUsuario();
+        panelPersona = new PanelPersona();
 
-
+        this.add(panelUsuario);
+        this.add(panelBolsillo);
+        this.add(panelPersona);
 }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        try {
-            comprador.SetMonedaMano(new Moneda1500(1));
-        } catch (Exception e){}
-        //ImageIcon i = new ImageIcon(getClass().getResource(DibujadorDeObjetos.ObtenerImagen(comprador.getMano()[0])));
-        ImageIcon i = SintetizadorVisual.ObtenerImagen(comprador.getMano()[0]);
-        Mano.setIcon(i);
 
+        int anchoPanel = getWidth();
+        int altoPanel = getHeight();
+
+        //Calcular posiciones y dimensiones de PanelBolsillo
+        int anchoPanelBolsillo = (int) (anchoPanel * 0.45);
+        int altoPanelBolsillo = (int) (altoPanel * 0.75);
+        int posXPanelBolsillo = (int) (anchoPanel * 0.55);
+        int posYPanelBolsillo = 0;
+
+        //Calcular posiciones y dimensiones de la Persona
+        int margenPersonaX = (int) (anchoPanel * 0.01);
+        int margenPersonaY = (int) (altoPanel * 0.01);
+        int anchoPersona = (int) ((anchoPanel * 0.55) - (2 * margenPersonaX));
+        int altoPersona = (int) ((altoPanel * 0.75) - (2 * margenPersonaY));
+
+        //Calcular posiciones y dimensiones de la interfaz de Usuario
+        int anchoUsuario = anchoPanel;
+        int altoUsuario = (int) (altoPanel * 0.25);
+        int posXUsuario = 0;
+        int posYUsuario = (int) (altoPanel * 0.75);
+
+        //Establecer los límites de los componentes
+        panelBolsillo.setBounds(posXPanelBolsillo, posYPanelBolsillo, anchoPanelBolsillo, altoPanelBolsillo);
+        panelPersona.setBounds(margenPersonaX, margenPersonaY, anchoPersona, altoPersona);
+        panelUsuario.setBounds(posXUsuario, posYUsuario, anchoUsuario, altoUsuario);
     }
 }

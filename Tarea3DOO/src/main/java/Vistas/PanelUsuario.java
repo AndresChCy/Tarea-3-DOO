@@ -2,36 +2,51 @@ package Vistas;
 
 import javax.swing.*;
 import java.awt.*;
-import java.lang.management.MemoryNotificationInfo;
-import javax.swing.ImageIcon;
-import java.awt.Image;
-import java.awt.Graphics;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class PanelUsuario extends JPanel {
-    ImageIcon icon = new ImageIcon(getClass().getResource("/Moneda100.png"));
-    public PanelUsuario(){
-        setBackground(Color.blue);
-        this.setLayout(new BorderLayout());
-        this.add(new JButton("Consumir"),BorderLayout.WEST);
-        JPanel Monedas = new JPanel();
-        Monedas.setBackground(Color.white);
-        Monedas.setLayout(new BorderLayout(20,20));
-        Monedas.add(new JLabel("Dar moneda"),BorderLayout.NORTH);
-        JPanel AuxMon = new JPanel();
-        AuxMon.setLayout(new GridLayout(2,2));
-        AuxMon.setBackground(Color.white);
-        AuxMon.add(new JLabel(icon));
-        AuxMon.add(new JLabel("moneda500"));
-        AuxMon.add(new JLabel("moneda1000"));
-        AuxMon.add(new JLabel("moneda1500"));
-        Monedas.add(AuxMon,BorderLayout.CENTER);
-        this.add(Monedas,BorderLayout.CENTER);
+    private PanelMonedas panelMonedas;
+    private PanelBotonConsumir panelBotonConsumir;
 
+    public PanelUsuario() {
+        setLayout(null);
+        panelMonedas = new PanelMonedas();
+        this.add(panelMonedas);
+        panelBotonConsumir = new PanelBotonConsumir();
+        this.add(panelBotonConsumir);
+
+        // Agregar un ComponentAdapter para manejar cambios de tamaño en el panel
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                actualizarDiseño();
+            }
+        });
     }
 
-    public void paintComponent(Graphics g){
+    /**
+     * Método para actualizar el diseño de los componentes del panel de usuario.
+     */
+    private void actualizarDiseño() {
+        int anchoPanel = getWidth();
+        int altoPanel = getHeight();
+
+        int margenX = (int) (anchoPanel * 0.05);
+        int altoMonedas = altoPanel;
+        int anchoMonedas = altoMonedas + margenX;
+        int anchoBoton = anchoPanel - anchoMonedas;
+        int altoBoton = altoPanel;
+
+        int posXMonedas = anchoBoton;
+
+        panelMonedas.setBounds(posXMonedas, 0, anchoMonedas, altoMonedas);
+        panelBotonConsumir.setBounds(0, 0, anchoBoton, altoBoton);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        actualizarDiseño(); // Asegurar que el diseño se actualice correctamente
     }
-
 }

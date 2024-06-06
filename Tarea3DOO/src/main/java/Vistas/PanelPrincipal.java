@@ -41,13 +41,13 @@ public class PanelPrincipal extends JPanel {
         // Agregar el panel del expendedor al lado izquierdo del panel principal
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weightx = 0.6; // Relación de expansión horizontal 60%
+        gbc.weightx = 0.5; // Relación de expansión horizontal 50%
         this.add(exp, gbc);
 
         // Agregar el panel del comprador al lado derecho del panel principal
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.weightx = 0.4; // Relación de expansión horizontal 40%
+        gbc.weightx = 0.5; // Relación de expansión horizontal 50%
         this.add(com, gbc);
     }
     public void paintComponent(Graphics g){
