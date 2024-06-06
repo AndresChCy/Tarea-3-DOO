@@ -13,6 +13,7 @@ public class Main {
             juan.SetMonedaMano(m);
             juan.Pagar(exp);
             juan.Comprar(CaracteristicasProducto.FANTA, exp);
+            juan.agarrarProducto(exp);
             juan.ConsumirDeLaMano();
             System.out.println(juan.queConsumiste() + " " + juan.cuantoVuelto());
 
@@ -21,13 +22,16 @@ public class Main {
             juan.SetMonedaMano(m);
             juan.Pagar(exp);
             juan.Comprar(CaracteristicasProducto.FANTA, exp);
+            juan.agarrarProducto(exp);
             juan.ConsumirDeLaMano();
             System.out.println(juan.queConsumiste() + " " + juan.cuantoVuelto());
 
             m = new Moneda1000(3);
             juan = new Comprador();
             juan.SetMonedaMano(m);
+            juan.Pagar(exp);
             juan.Comprar(CaracteristicasProducto.FANTA, exp);
+            juan.agarrarProducto(exp);
             juan.ConsumirDeLaMano();
             System.out.println(juan.queConsumiste() + " " + juan.cuantoVuelto());
 
