@@ -6,6 +6,8 @@ import Modelo.Moneda;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -47,6 +49,14 @@ public class PanelSlot extends JPanel {
                 }catch (Exception ex){}
             }
         });
+        moneda.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                try {
+                    actualizarIcono(PanelSlot.this,SintetizadorVisual.ObtenerIcono(contiene).getImage());
+                }catch (NullPointerException ex){}
+            }
+        });
         contiene = null;
         this.add(moneda);
     }
@@ -72,8 +82,7 @@ public class PanelSlot extends JPanel {
     public void HacerMoneda(){
         try{
             // Obtener la imagen de la moneda y establecerla en la etiqueta
-            ImageIcon i = SintetizadorVisual.ObtenerImagen(contiene);
-            moneda.setIcon(i);
+            actualizarIcono(this,SintetizadorVisual.ObtenerIcono(contiene).getImage());
             repaint();
         } catch(NullPointerException e){
             moneda.setIcon(null);
@@ -82,6 +91,17 @@ public class PanelSlot extends JPanel {
 
     public void setContiene(Moneda m){
         this.contiene = m;
+    }
+    private void actualizarIcono(PanelSlot boton, Image imagen) {
+        if (imagen != null) {
+            int anchoBoton = boton.getWidth();
+            int altoBoton = boton.getHeight();
+            if (anchoBoton > 0 && altoBoton > 0) {
+                // Escalar la imagen para que se ajuste al tamaño del botón
+                Image img = imagen.getScaledInstance(anchoBoton, altoBoton, Image.SCALE_SMOOTH);
+                moneda.setIcon(new ImageIcon(img));
+            }
+        }
     }
 
 }

@@ -3,6 +3,7 @@ package Vistas;
 import Modelo.*;
 
 import javax.swing.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Una clase de metodos estaticos para factorizar el proceso de crear el entorno grafico
@@ -13,7 +14,7 @@ public class SintetizadorVisual {
      * @param o el objeto al cual queremos obtener su imagen
      * @return ImageIcon de la imagen del objeto
      */
-    public static ImageIcon ObtenerImagen(Object o) {
+    public static ImageIcon ObtenerIcono(Object o) {
         String aux =null ;
         if (o instanceof Moneda100) {
             aux = "/Moneda100.png";
@@ -34,8 +35,11 @@ public class SintetizadorVisual {
         } else if (o instanceof Fanta) {
             aux = "/Fanta.png";
         }
-        ImageIcon imagen= new ImageIcon(SintetizadorVisual.class.getResource(aux));
-        return imagen;
+        try {
+            ImageIcon imagen= new ImageIcon(SintetizadorVisual.class.getResource(aux));
+            return imagen;
+        }catch (NullPointerException e){return null; }
+
     }
 
     /**
@@ -69,5 +73,6 @@ public class SintetizadorVisual {
             return "No queda " + producto.name();
         }
     }
+
 
 }

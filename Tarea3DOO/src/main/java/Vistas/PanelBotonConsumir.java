@@ -1,5 +1,7 @@
 package Vistas;
 
+import Modelo.Comprador;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,7 +19,7 @@ public class PanelBotonConsumir extends JButton {
      * Configura el fondo del botón y establece el texto.
      * Agrega un ActionListener para manejar el evento de clic del mouse.
      */
-    public PanelBotonConsumir() {
+    public PanelBotonConsumir(PanelComprador com, Comprador comprador) {
         this.setBackground(Color.BLACK); // Establecer el fondo del botón como negro
         this.texto = "Consumir"; // Texto predeterminado
 
@@ -25,8 +27,13 @@ public class PanelBotonConsumir extends JButton {
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aquí puedes agregar el código que deseas ejecutar cuando se haga clic en el botón
-                System.out.println("Botón Consumir clickeado");
+                try {
+                    comprador.ConsumirDeLaMano();
+                    System.out.println(comprador.queConsumiste());
+                    com.repaint();
+                } catch (Exception ex) {
+                    System.out.println("NO TE COMAS ESOO");
+                }
             }
         });
     }

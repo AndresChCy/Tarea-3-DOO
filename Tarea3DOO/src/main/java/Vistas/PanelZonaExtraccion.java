@@ -46,7 +46,7 @@ public class PanelZonaExtraccion extends JPanel {
             public void mouseMoved(MouseEvent e) {
                 // Cambiar la imagen de la máquina a abierta cuando el ratón se mueve sobre el panel
                 try{
-                    producto.setIcon(SintetizadorVisual.ObtenerImagen(expendedor.getProducto()));
+                    actualizarIcono(PanelZonaExtraccion.this,SintetizadorVisual.ObtenerIcono(expendedor.getProducto()).getImage(),producto);
                 }catch(NullPointerException ex){
                     producto.setIcon(null);
                 }
@@ -88,5 +88,16 @@ public class PanelZonaExtraccion extends JPanel {
         int altoPanel = getHeight();
         // Dibujar la imagen de la máquina actual en el panel
         g.drawImage(imagenMaquinaActual.getScaledInstance(anchoPanel, altoPanel, Image.SCALE_SMOOTH), 0, 0, this);
+    }
+    private void actualizarIcono(PanelZonaExtraccion boton, Image imagen,JLabel producto) {
+        if (imagen != null) {
+            int anchoBoton = boton.getWidth();
+            int altoBoton = boton.getHeight();
+            if (anchoBoton > 0 && altoBoton > 0) {
+                // Escalar la imagen para que se ajuste al tamaño del botón
+                Image img = imagen.getScaledInstance(anchoBoton, altoBoton, Image.SCALE_SMOOTH);
+                producto.setIcon(new ImageIcon(img));
+            }
+        }
     }
 }

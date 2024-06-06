@@ -24,11 +24,11 @@ public class PanelUsuario extends JPanel {
     private PanelBotonConsumir panelBotonConsumir;
 
 
-    public PanelUsuario(PanelBolsillo bolsillo,Comprador comprador) {
+    public PanelUsuario(PanelBolsillo bolsillo,Comprador comprador,PanelComprador com) {
         setLayout(null);
         panelMonedas = new PanelMonedas(bolsillo, comprador);
         this.add(panelMonedas);
-        panelBotonConsumir = new PanelBotonConsumir();
+        panelBotonConsumir = new PanelBotonConsumir(com,comprador);
         this.add(panelBotonConsumir);
 
         // Agregar un ComponentAdapter para manejar cambios de tamaño en el panel
