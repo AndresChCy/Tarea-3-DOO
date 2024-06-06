@@ -17,6 +17,7 @@ public class PanelComprador extends JPanel {
     private PanelBolsillo panelBolsillo; // Panel que muestra el bolsillo del comprador
     private PanelPersona panelPersona; // Panel que muestra la persona
 
+
     /**
      * Constructor de la clase PanelComprador.
      * Configura el fondo del panel y agrega los componentes relacionados con el comprador.
@@ -26,6 +27,7 @@ public class PanelComprador extends JPanel {
     public PanelComprador(Comprador comprador) {
         // Establecer el fondo del panel como verde
         this.setBackground(Color.green);
+
         // Usar un diseño nulo para posicionar manualmente los componentes
         this.setLayout(null);
 
@@ -39,6 +41,7 @@ public class PanelComprador extends JPanel {
         this.add(panelBolsillo);
         this.add(panelPersona);
     }
+
 
     /**
      * Override del método paintComponent para personalizar el aspecto del panel.

@@ -1,11 +1,12 @@
 package Vistas;
 
-import Modelo.CaracteristicasProducto;
-import Modelo.Expendedor;
+import Modelo.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -14,6 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import Modelo.CaracteristicasProducto;
+import Modelo.Expendedor;
 
 /**
  * La clase PanelBotones representa un panel que contiene botones con imágenes de productos.
@@ -23,17 +26,20 @@ public class PanelBotones extends JPanel {
     private Map<String, BufferedImage> imagenesBotones;
     private String[] botones = {"Fanta", "Sprite", "CocaCola", "Snickers", "Super8", "Check"};
     private JButton[] botonesArray;
+    private CaracteristicasProducto cualProducto;
     private PanelMensajes panelMensajes;
     private LogicaBotones logicaBotones;
     private Expendedor expendedor;
+    private PanelExpendedor exp;
 
     /**
      * Constructor de la clase PanelBotones.
      * Inicializa el panel, carga las imágenes de los productos y configura el diseño del panel.
      */
-    public PanelBotones(Expendedor expendedor, PanelMensajes panelMensajes) {
-        this.expendedor = expendedor;
 
+    public PanelBotones(Expendedor expendedor, PanelMensajes panelMensajes,PanelExpendedor exp) {
+        this.expendedor = expendedor;
+        this.exp = exp;
         // Inicializa el mapa de imágenes
         imagenesBotones = new HashMap<>();
         botonesArray = new JButton[6];
@@ -41,6 +47,7 @@ public class PanelBotones extends JPanel {
         // Inicializa el panel de los mensajes
         this.panelMensajes = panelMensajes;
         logicaBotones = new LogicaBotones(expendedor);
+
 
         try {
             // Cargar las imágenes de los productos y almacenarlas en el mapa
@@ -77,30 +84,14 @@ public class PanelBotones extends JPanel {
         for (int i = 0; i < 6; i++) {
             String nombreBoton = botones[i];
             BufferedImage productoImg = imagenesBotones.get(nombreBoton);
-            if (productoImg != null) {
+            if (productoImg != null ) {
                 JButton boton = new JButton();
                 botonesArray[i] = boton;
                 add(boton);
                 if (i < 5) {
-                    final CaracteristicasProducto precioProducto = CaracteristicasProducto.valueOf(nombreBoton.toUpperCase());
-                    boton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            String mensaje = logicaBotones.verificarProducto(precioProducto);
-                            panelMensajes.actualizarMensaje(mensaje);
-                        }
-                    });
+                    boton.addActionListener(new ElegirProducto(i));
                 } else { // Botón "Comprar"
-                    boton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (expendedor.getCantidadDepositoExpecial() == 0) {
-                                // Se toman las monedas y se realiza la compra en Expendedor
-                            } else {
-                                panelMensajes.actualizarMensaje("Favor retirar producto\nantes de comprar otro.");
-                            }
-                        }
-                    });
+                    boton.addActionListener(new ConfirmarPago());
                 }
             }
         }
@@ -125,4 +116,42 @@ public class PanelBotones extends JPanel {
             }
         }
     }
-}
+
+    private class ElegirProducto implements ActionListener {
+        private CaracteristicasProducto cual;
+
+        public ElegirProducto(int cual) {
+            this.cual = SintetizadorVisual.ObtenerEleccion(cual);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            cualProducto = cual;
+            String mensaje = logicaBotones.verificarProducto(cual);
+            panelMensajes.actualizarMensaje(mensaje );
+        }
+    }
+
+        private class ConfirmarPago implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (expendedor.getCantidadDepositoExpecial() == 0) {
+                    try{
+                        expendedor.comprarProducto(cualProducto);
+                        panelMensajes.actualizarMensaje("Compra exitosa! \n Retire el producto");
+                        exp.repaint();
+                    } catch (NoHayProductoException ex) {
+                        panelMensajes.actualizarMensaje("Producto no disponible :(");
+                    } catch (PagoInsuficienteException ex) {
+                        panelMensajes.actualizarMensaje("Pago insuficiente." +
+                                " \n Por favor retire su dinero.");
+                    } catch (PagoIncorrectoException ex) {
+                        panelMensajes.actualizarMensaje("Ingrese monedas para pagar.");
+                    }
+                } else {
+                    panelMensajes.actualizarMensaje("Favor retirar producto\nantes de comprar otro.");
+                }
+            }
+        }
+    }
+

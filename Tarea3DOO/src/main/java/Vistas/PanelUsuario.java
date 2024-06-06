@@ -6,10 +6,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import Modelo.CreaMonedas;
+import Modelo.Moneda;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.lang.management.MemoryNotificationInfo;
+import javax.swing.ImageIcon;
+import java.awt.Image;
+import java.awt.Graphics;
 
 public class PanelUsuario extends JPanel {
     private PanelMonedas panelMonedas;
     private PanelBotonConsumir panelBotonConsumir;
+
 
     public PanelUsuario(PanelBolsillo bolsillo,Comprador comprador) {
         setLayout(null);
@@ -51,4 +64,35 @@ public class PanelUsuario extends JPanel {
         super.paintComponent(g);
         actualizarDiseño(); // Asegurar que el diseño se actualice correctamente
     }
+
+
+ /*   public void BotonesMoneda(JPanel panel){
+        for(CreaMonedas m : CreaMonedas.values()){
+            JLabel iconoM = new JLabel(SintetizadorVisual.ObtenerImagen(m.crearMoneda(0)));
+            iconoM.addMouseListener(new GeneraMoneda(m));
+            panel.add(iconoM);
+        }
+    }
+    private class GeneraMoneda implements MouseListener{
+        private static int contador = 1;
+        private CreaMonedas generador;
+        public GeneraMoneda(CreaMonedas m){
+            this.generador = m;
+        }
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            Moneda m = generador.crearMoneda(contador);
+            comprador.addMonedaBolsillo(m);
+            System.out.println("Se genero una: " + m.toString());
+            contador++;
+            bolsillo.repaint();
+
+        }
+        public void mousePressed(MouseEvent e) {}
+        public void mouseReleased(MouseEvent e) {}
+        public void mouseEntered(MouseEvent e) {}
+        public void mouseExited(MouseEvent e) {}
+    }
+*/
+
 }

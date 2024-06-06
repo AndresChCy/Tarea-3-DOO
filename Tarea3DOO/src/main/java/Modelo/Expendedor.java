@@ -18,6 +18,7 @@ public class Expendedor {
         DepositoVuelto = new Deposito<>();
         DepositoPago = new ArrayList<>();
         depositos = new ArrayList[CaracteristicasProducto.values().length];
+        DepositoEspecial = null;
         for (CaracteristicasProducto Producto : CaracteristicasProducto.values()) {
             depositos[Producto.ordinal()] = new ArrayList<>();
             for ( int i=0 ; i<NumProductos ; i++ ) {
@@ -31,7 +32,7 @@ public class Expendedor {
      * @param m     Moneda que se añade al deposito.
      */
     public void Pagar(Moneda m) {
-        DepositoPago.add(m);
+        if(m!= null) DepositoPago.add(m);
     }
 
     /**
@@ -128,16 +129,22 @@ public class Expendedor {
     }
     /** Método para saber si hay un producto en DepositoEspecial */
     public int getCantidadDepositoExpecial() {
-        if (DepositoEspecial != null) {
+        if (DepositoEspecial == null) {
             return 0;
         } else {
             return 1;
         }
     }
+
+    public Producto RetirarProducto(){
+        Producto p = this.DepositoEspecial;
+        this.DepositoEspecial = null;
+        return p;
+    }
     public int ValorPago(){
         int a = 0;
-        for (int i = 0;i <DepositoPago.size();i++ ){
-            a = a+ DepositoPago.get(i).getValor();
+        for (int i = 0; i< DepositoPago.size() ;i++){
+            a= a + DepositoPago.get(i).getValor();
         }
         return a;
     }

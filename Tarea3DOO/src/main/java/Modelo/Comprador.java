@@ -26,7 +26,7 @@ public class Comprador {
      * @param m     Moneda que se desea meter al bolsillo.
      */
     public void addMonedaBolsillo(Moneda m) {
-        if ( Bolsillo.size()<10 ) {
+        if ( Bolsillo.size()<10 && m!=null) {
             Bolsillo.add(m);
         } else {
             System.out.println("No se puede seleccionar más monedas.");
@@ -87,6 +87,7 @@ public class Comprador {
     public void Pagar(Expendedor exp) throws Exception {
         try {
             exp.Pagar((Moneda) Mano[0]);
+            Mano[0] = null;
         } catch ( Exception e) {
             throw new Exception("No tienes una moneda en la mano.");
         }
@@ -97,7 +98,9 @@ public class Comprador {
      * @param exp     Expendedor del cual se ha comprado.
      */
     public void agarrarProducto(Expendedor exp) {
-        Mano[0] = exp.getProducto();
+        if(Mano[0]==null){
+            Mano[0] = exp.RetirarProducto();
+        }
     }
 
     /**

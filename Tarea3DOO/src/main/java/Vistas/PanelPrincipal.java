@@ -2,7 +2,6 @@ package Vistas;
 
 import Modelo.Comprador;
 import Modelo.Expendedor;
-
 import javax.swing.JPanel;
 import java.awt.*;
 
@@ -21,7 +20,7 @@ public class PanelPrincipal extends JPanel {
      */
     public PanelPrincipal() {
         // Inicializar el expendedor con una capacidad predeterminada de 4 productos
-        expendedor = new Expendedor(4);
+        expendedor = new Expendedor(1);
 
         // Configurar el diseño del panel principal como GridBagLayout
         setLayout(new GridBagLayout());
@@ -35,6 +34,7 @@ public class PanelPrincipal extends JPanel {
 
         com = new PanelComprador(comprador);
         exp = new PanelExpendedor(expendedor,comprador,com);
+
 
         // Establecer el color de fondo del panel principal como negro
         this.setBackground(Color.black);

@@ -16,11 +16,14 @@ import java.awt.event.ComponentEvent;
  * Contiene un panel de botones y de mensajes que se ajustan automáticamente al tamaño del panel principal.
  */
 public class PanelMaquina2 extends JPanel {
+    private Expendedor expendedor;
     private BufferedImage imagenFondoMaquina2; // Imagen de fondo de la segunda máquina
     private PanelBotones panelBotones; // Panel que contiene los botones
     private PanelMensajes panelMensajes; // Panel que muestra los mensajes
     private PanelBotonDepositarMonedas panelBotonDepositarMonedas; // Botón para depositar monedas
     private PanelBotonRetirarVuelto panelBotonRetirarVuelto; // Botón para retirar vuelto
+
+
 
     /**
      * Constructor de la clase PanelMaquina2.
@@ -28,7 +31,12 @@ public class PanelMaquina2 extends JPanel {
      *
      * @param expendedor el expendedor asociado a este panel.
      */
-    public PanelMaquina2(Expendedor expendedor,Comprador comprador, PanelComprador com) {
+
+    public PanelMaquina2(Expendedor expendedor,Comprador comprador, PanelComprador com,PanelExpendedor exp) {
+
+        this.expendedor = expendedor;
+
+
         try {
             // Cargar la imagen de fondo de la segunda máquina
             imagenFondoMaquina2 = ImageIO.read(getClass().getResource("/Máquina_Fondo_2.png"));
@@ -44,12 +52,16 @@ public class PanelMaquina2 extends JPanel {
         this.add(panelMensajes);
 
         // Crear y agregar el panel de botones
-        panelBotones = new PanelBotones(expendedor, panelMensajes);
+
+        panelBotones = new PanelBotones(expendedor, panelMensajes,exp);
+
         this.add(panelBotones);
 
         // Crear y agregar los botones para depositar monedas y retirar vuelto
+
         panelBotonDepositarMonedas = new PanelBotonDepositarMonedas(panelMensajes,expendedor,com,comprador);
-        panelBotonRetirarVuelto = new PanelBotonRetirarVuelto(panelMensajes);
+        panelBotonRetirarVuelto = new PanelBotonRetirarVuelto(panelMensajes,comprador,expendedor,com);
+
         this.add(panelBotonDepositarMonedas);
         this.add(panelBotonRetirarVuelto);
 

@@ -1,10 +1,16 @@
 package Vistas;
 
+
 import javax.swing.*;
 import java.awt.*;
 
-import Modelo.Comprador;
-import Modelo.Expendedor;
+
+
+import javax.swing.*;
+import java.awt.*;
+
+import Modelo.*;
+
 
 /**
  * La clase PanelExpendedor representa el panel que contiene la interfaz gráfica del expendedor.
@@ -14,13 +20,18 @@ public class PanelExpendedor extends JPanel {
     private PanelMaquina2 panelMaquina2;
     private PanelDepositos panelDepositos;
     private PanelZonaExtraccion panelZonaExtraccion;
+    private Expendedor expendedor;
 
     /**
      * Constructor de la clase PanelExpendedor.
      * Inicializa los componentes de la interfaz gráfica del expendedor.
      * @param expendedor El Expendedor asociado al panel.
      */
+
     public PanelExpendedor(Expendedor expendedor,Comprador comprador ,PanelComprador com) {
+
+        this.expendedor = expendedor;
+
         // Establecer el color de fondo del panel
         this.setBackground(new java.awt.Color(30, 120, 120));
         // Configurar el diseño del panel como null para permitir un diseño personalizado
@@ -28,9 +39,10 @@ public class PanelExpendedor extends JPanel {
 
         // Inicializar los componentes de la interfaz gráfica del expendedor
         panelMaquina = new PanelMaquina();
-        panelMaquina2 = new PanelMaquina2(expendedor,comprador,com);
+
+        panelMaquina2 = new PanelMaquina2(expendedor,comprador,com,this);
         panelDepositos = new PanelDepositos(expendedor);
-        panelZonaExtraccion = new PanelZonaExtraccion();
+        panelZonaExtraccion = new PanelZonaExtraccion(comprador, expendedor,com);
 
         // Configurar el diseño del panel interno de la máquina como null para permitir un diseño personalizado
         panelMaquina.setLayout(null);
@@ -48,7 +60,8 @@ public class PanelExpendedor extends JPanel {
      * @param g El contexto gráfico en el que se dibujan los componentes.
      */
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
+
         super.paintComponent(g);
 
         // Obtener las dimensiones del panel

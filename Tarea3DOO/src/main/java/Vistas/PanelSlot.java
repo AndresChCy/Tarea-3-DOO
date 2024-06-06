@@ -1,5 +1,6 @@
 package Vistas;
 
+
 import Modelo.Comprador;
 import Modelo.Moneda;
 import javax.imageio.ImageIO;
@@ -19,13 +20,14 @@ public class PanelSlot extends JPanel {
     private Moneda contiene; // Moneda contenida en el slot
     private JLabel moneda; // Etiqueta para mostrar la imagen de la moneda
     private Comprador comprador;
+    private int numSlot;
     /**
      * Constructor de la clase PanelSlot.
      * Inicializa el panel y carga la imagen de fondo del slot.
      * Crea la etiqueta para mostrar la moneda y la agrega al panel.
      */
     public PanelSlot(Comprador comprador, int i, PanelComprador panel){
-        int numSlot = i;
+        numSlot = i;
         this.comprador = comprador;
         try {
             this.ImagenFondo = ImageIO.read(getClass().getResource("/SlotBolsillo.png"));
@@ -62,23 +64,24 @@ public class PanelSlot extends JPanel {
         this.HacerMoneda();
     }
 
+
     /**
      * Método para establecer la moneda que contiene el slot.
      *
-     * @param m la moneda a establecer.
-     */
-    public void setContiene(Moneda m){
-        this.contiene = m;
-    }
-
-    /**
-     * Método para mostrar la imagen de la moneda en el slot.
      */
     public void HacerMoneda(){
         try{
             // Obtener la imagen de la moneda y establecerla en la etiqueta
             ImageIcon i = SintetizadorVisual.ObtenerImagen(contiene);
             moneda.setIcon(i);
-        } catch(NullPointerException e){}
+            repaint();
+        } catch(NullPointerException e){
+            moneda.setIcon(null);
+        }
     }
+
+    public void setContiene(Moneda m){
+        this.contiene = m;
+    }
+
 }

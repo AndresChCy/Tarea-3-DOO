@@ -12,6 +12,7 @@ import java.awt.Graphics;
  * Representa el panel que muestra el bolsillo del comprador, que contiene varias monedas.
  */
 public class PanelBolsillo extends JPanel {
+
     Comprador comprador; // El comprador asociado al bolsillo
     private PanelSlot[] slots; // Array de slots que representan las posiciones del bolsillo
 

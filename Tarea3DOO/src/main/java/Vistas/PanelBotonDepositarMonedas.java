@@ -17,7 +17,9 @@ public class PanelBotonDepositarMonedas extends JButton {
      *
      * @param panelMensajes PanelMensajes al que se le actualizará el mensaje al hacer clic en el botón.
      */
+
     public PanelBotonDepositarMonedas(PanelMensajes panelMensajes, Expendedor expendedor, PanelComprador panel,Comprador comprador) {
+
         // Hacer el botón transparente
         setContentAreaFilled(false);
 
