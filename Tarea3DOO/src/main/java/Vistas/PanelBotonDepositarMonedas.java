@@ -1,5 +1,8 @@
 package Vistas;
 
+import Modelo.Comprador;
+import Modelo.Expendedor;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,16 +17,22 @@ public class PanelBotonDepositarMonedas extends JButton {
      *
      * @param panelMensajes PanelMensajes al que se le actualizará el mensaje al hacer clic en el botón.
      */
-    public PanelBotonDepositarMonedas(PanelMensajes panelMensajes) {
+    public PanelBotonDepositarMonedas(PanelMensajes panelMensajes, Expendedor expendedor, PanelComprador panel,Comprador comprador) {
         // Hacer el botón transparente
         setContentAreaFilled(false);
 
         // Agregar un ActionListener para manejar el evento de clic
         addActionListener(e -> {
-            //##################################
-            // Lógica al hacer clic en el botón
-            //##################################
-            panelMensajes.actualizarMensaje("Test1");
+            try {
+                comprador.Pagar(expendedor);
+                panel.repaint();
+
+            } catch (Exception ex) {
+                panelMensajes.actualizarMensaje("Por favor solo monedas");
+                System.out.println("No puedes pagar con eso!");
+            }
+            panelMensajes.actualizarMensaje(expendedor.ValorPago());
+
         });
     }
 

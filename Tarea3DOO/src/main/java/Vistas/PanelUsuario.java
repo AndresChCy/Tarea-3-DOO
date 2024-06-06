@@ -1,5 +1,7 @@
 package Vistas;
 
+import Modelo.Comprador;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
@@ -9,9 +11,9 @@ public class PanelUsuario extends JPanel {
     private PanelMonedas panelMonedas;
     private PanelBotonConsumir panelBotonConsumir;
 
-    public PanelUsuario() {
+    public PanelUsuario(PanelBolsillo bolsillo,Comprador comprador) {
         setLayout(null);
-        panelMonedas = new PanelMonedas();
+        panelMonedas = new PanelMonedas(bolsillo, comprador);
         this.add(panelMonedas);
         panelBotonConsumir = new PanelBotonConsumir();
         this.add(panelBotonConsumir);

@@ -10,6 +10,7 @@ import java.awt.Font;
  */
 public class PanelMensajes extends JPanel {
     private String mensaje = "Bienvenido a la\nmáquina del Futuro";
+    private String guardado;
 
     /**
      * Constructor de la clase PanelMensajes.
@@ -19,6 +20,7 @@ public class PanelMensajes extends JPanel {
         this.setBackground(Color.black);
     }
 
+
     /**
      * Actualiza el mensaje que se muestra en el panel y repinta el componente.
      *
@@ -26,6 +28,11 @@ public class PanelMensajes extends JPanel {
      */
     public void actualizarMensaje(String nuevoMensaje) {
         this.mensaje = nuevoMensaje;
+        guardado = nuevoMensaje;
+        repaint();
+    }
+    public void actualizarMensaje(int i){
+        mensaje = guardado + "\n Ingreso: " + i+ "$";
         repaint();
     }
 

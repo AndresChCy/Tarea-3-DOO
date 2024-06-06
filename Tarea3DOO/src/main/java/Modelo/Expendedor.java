@@ -134,4 +134,11 @@ public class Expendedor {
             return 1;
         }
     }
+    public int ValorPago(){
+        int a = 0;
+        for (int i = 0;i <DepositoPago.size();i++ ){
+            a = a+ DepositoPago.get(i).getValor();
+        }
+        return a;
+    }
 }

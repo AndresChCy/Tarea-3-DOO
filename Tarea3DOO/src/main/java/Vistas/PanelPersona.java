@@ -1,5 +1,7 @@
 package Vistas;
 
+import Modelo.Comprador;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +12,7 @@ public class PanelPersona extends JPanel {
     private BufferedImage imagenPersona;
     private PanelMano panelMano;
 
-    public PanelPersona() {
+    public PanelPersona(Comprador comprador) {
         setOpaque(false);
         try {
             imagenPersona = ImageIO.read(getClass().getResource("/Comprador.png"));
@@ -19,7 +21,7 @@ public class PanelPersona extends JPanel {
             System.out.println("Error al cargar la imagen de la persona: " + ex.getMessage());
         }
 
-        panelMano = new PanelMano();
+        panelMano = new PanelMano(comprador);
         this.add(panelMano);
     }
 

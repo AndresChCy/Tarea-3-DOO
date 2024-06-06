@@ -1,5 +1,6 @@
 package Vistas;
 
+import Modelo.Comprador;
 import Modelo.Expendedor;
 
 import javax.imageio.ImageIO;
@@ -27,7 +28,7 @@ public class PanelMaquina2 extends JPanel {
      *
      * @param expendedor el expendedor asociado a este panel.
      */
-    public PanelMaquina2(Expendedor expendedor) {
+    public PanelMaquina2(Expendedor expendedor,Comprador comprador, PanelComprador com) {
         try {
             // Cargar la imagen de fondo de la segunda máquina
             imagenFondoMaquina2 = ImageIO.read(getClass().getResource("/Máquina_Fondo_2.png"));
@@ -47,7 +48,7 @@ public class PanelMaquina2 extends JPanel {
         this.add(panelBotones);
 
         // Crear y agregar los botones para depositar monedas y retirar vuelto
-        panelBotonDepositarMonedas = new PanelBotonDepositarMonedas(panelMensajes);
+        panelBotonDepositarMonedas = new PanelBotonDepositarMonedas(panelMensajes,expendedor,com,comprador);
         panelBotonRetirarVuelto = new PanelBotonRetirarVuelto(panelMensajes);
         this.add(panelBotonDepositarMonedas);
         this.add(panelBotonRetirarVuelto);

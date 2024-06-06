@@ -30,9 +30,9 @@ public class PanelComprador extends JPanel {
         this.setLayout(null);
 
         // Inicializar los paneles relacionados con el comprador
-        panelBolsillo = new PanelBolsillo(comprador);
-        panelUsuario = new PanelUsuario();
-        panelPersona = new PanelPersona();
+        panelBolsillo = new PanelBolsillo(comprador,this);
+        panelUsuario = new PanelUsuario(panelBolsillo,comprador);
+        panelPersona = new PanelPersona(comprador);
 
         // Agregar los paneles al panel principal
         this.add(panelUsuario);

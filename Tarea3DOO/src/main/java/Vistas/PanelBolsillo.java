@@ -21,7 +21,7 @@ public class PanelBolsillo extends JPanel {
      *
      * @param comprador el objeto Comprador asociado al bolsillo.
      */
-    public PanelBolsillo(Comprador comprador){
+    public PanelBolsillo(Comprador comprador, PanelComprador com){
         // Configurar el diseño del panel como una cuadrícula de 5x2
         this.setLayout(new GridLayout(5, 2));
         // Inicializar el array de slots
@@ -29,7 +29,7 @@ public class PanelBolsillo extends JPanel {
         this.comprador = comprador; // Asignar el comprador pasado como parámetro
         // Crear los slots del bolsillo y agregarlos al panel
         for (int i = 0; i < 10; i++) {
-            slots[i] = new PanelSlot();
+            slots[i] = new PanelSlot(comprador,i,com);
             this.add(slots[i]);
         }
     }

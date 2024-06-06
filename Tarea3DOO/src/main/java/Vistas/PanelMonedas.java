@@ -1,5 +1,6 @@
 package Vistas;
 
+import Modelo.Comprador;
 import Modelo.Moneda;
 
 import javax.imageio.ImageIO;
@@ -20,13 +21,17 @@ public class PanelMonedas extends JPanel {
     private String[] nombresMonedas = {"Moneda100", "Moneda500", "Moneda1000", "Moneda1500"};
     private Map<String, BufferedImage> imagenesMonedas;
     private JButton[] botonesMonedas;
-    public static int numSerie = 1; // Número de serie inicial para las monedas
+    public static int numSerie = 1;// Número de serie inicial para las monedas
+    public Comprador comprador;
+    public PanelBolsillo bolsillo;
 
     /**
      * Constructor de la clase PanelMonedas.
      * Configura el panel y carga las imágenes de las monedas.
      */
-    public PanelMonedas() {
+    public PanelMonedas(PanelBolsillo bolsillo, Comprador comprador) {
+        this.comprador = comprador;
+        this.bolsillo = bolsillo;
         setBackground(Color.BLUE);
         setLayout(new GridBagLayout());
 
@@ -90,6 +95,9 @@ public class PanelMonedas extends JPanel {
                         // Crear una nueva instancia de la clase MonedaX con un número de serie incremental
                         Moneda m = (Moneda) constructor.newInstance(numSerie);
                         numSerie++; // Incrementar el número de serie para la próxima moneda
+                        comprador.addMonedaBolsillo(m);
+                        System.out.println("Se genero una: " + m.toString());
+                        bolsillo.repaint();
 
                         // Realizar acciones con la moneda creada
 

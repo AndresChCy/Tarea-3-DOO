@@ -32,8 +32,9 @@ public class PanelPrincipal extends JPanel {
         Comprador comprador = new Comprador();
 
         // Crear e inicializar el panel del expendedor y el panel del comprador
-        exp = new PanelExpendedor(expendedor);
+
         com = new PanelComprador(comprador);
+        exp = new PanelExpendedor(expendedor,comprador,com);
 
         // Establecer el color de fondo del panel principal como negro
         this.setBackground(Color.black);
