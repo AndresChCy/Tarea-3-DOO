@@ -2,9 +2,11 @@ package Vistas;
 
 import Modelo.Comprador;
 import Modelo.CreaMonedas;
+import Modelo.Moneda;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.management.MemoryNotificationInfo;
@@ -16,12 +18,26 @@ public class PanelUsuario extends JPanel {
     private Comprador comprador;
     private PanelBolsillo bolsillo;
 
-    public PanelUsuario(Comprador comprador,PanelBolsillo bolsillo){
+    public PanelUsuario(Comprador comprador,PanelBolsillo bolsillo,PanelComprador com){
         this.comprador = comprador;
         this.bolsillo = bolsillo;
         setBackground(Color.blue);
         this.setLayout(new BorderLayout());
-        this.add(new JButton("Consumir"),BorderLayout.WEST);
+        JButton consumir = new JButton("Consumir");
+        consumir.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try{
+                    comprador.ConsumirDeLaMano();
+                    System.out.println(comprador.queConsumiste());
+                }catch (Exception ex){
+                    System.out.println("NO TE COMAS ESO");
+                }
+                com.repaint();
+            }
+        });
+
+        this.add(consumir,BorderLayout.WEST);
         JPanel Monedas = new JPanel();
         Monedas.setBackground(Color.white);
         Monedas.setLayout(new BorderLayout(20,20));
@@ -55,7 +71,9 @@ public class PanelUsuario extends JPanel {
         }
         @Override
         public void mouseClicked(MouseEvent e) {
-            comprador.addMonedaBolsillo(generador.crearMoneda(contador));
+            Moneda m = generador.crearMoneda(contador);
+            comprador.addMonedaBolsillo(m);
+            System.out.println("Se genero una: " + m.toString());
             contador++;
             bolsillo.repaint();
 

@@ -4,8 +4,15 @@ import Modelo.*;
 
 import javax.swing.*;
 
+/**
+ * Una clase de metodos estaticos para factorizar el proceso de crear el entorno grafico
+ */
 public class SintetizadorVisual {
-
+    /**
+     * Metodo estatico que asimila tus objetos a una imagen de tus recursos
+     * @param o el objeto al cual queremos obtener su imagen
+     * @return ImageIcon de la imagen del objeto
+     */
     public static ImageIcon ObtenerImagen(Object o) {
         String aux =null ;
         if (o instanceof Moneda100) {
@@ -30,6 +37,12 @@ public class SintetizadorVisual {
         ImageIcon imagen= new ImageIcon(SintetizadorVisual.class.getResource(aux));
         return imagen;
     }
+
+    /**
+     * Metodo para obtener la eleccion de un producto en base a un orden (util para fors)
+     * @param i parametro que se asimila a la eleccion de un producto
+     * @return La eleccion del producto
+     */
     public static CaracteristicasProducto ObtenerEleccion(int i){
         switch(i){
             case 0:
@@ -48,6 +61,13 @@ public class SintetizadorVisual {
 
         }
         return null;
+    }
+    public static String verificarProducto(CaracteristicasProducto producto, Expendedor expendedor) {
+        if (expendedor.getCantidadProductos(producto.ordinal()) > 0) {
+            return "Precio:\n$" + producto.getPrecio();
+        } else {
+            return "No queda " + producto.name();
+        }
     }
 
 }

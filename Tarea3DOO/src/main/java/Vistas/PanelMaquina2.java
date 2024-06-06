@@ -31,7 +31,7 @@ public class PanelMaquina2 extends JPanel {
      *
      * @param expendedor el expendedor asociado a este panel.
      */
-    public PanelMaquina2(Expendedor expendedor,Comprador comprador, PanelComprador panelComprador) {
+    public PanelMaquina2(Expendedor expendedor,Comprador comprador, PanelComprador panelComprador,PanelExpendedor exp) {
 
         this.expendedor = expendedor;
 
@@ -51,7 +51,7 @@ public class PanelMaquina2 extends JPanel {
 
         // Crear y agregar el panel de botones
 
-        panelBotones = new PanelBotones(expendedor, panelMensajes);
+        panelBotones = new PanelBotones(expendedor, panelMensajes,exp);
 
         this.add(panelBotones);
 

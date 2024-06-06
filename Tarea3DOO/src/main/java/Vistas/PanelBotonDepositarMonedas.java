@@ -31,7 +31,8 @@ public class PanelBotonDepositarMonedas extends JButton {
                 panelMensajes.actualizarMensaje("Por favor solo monedas");
                 System.out.println("No puedes pagar con eso!");
             }
-            panelMensajes.actualizarMensaje("Test1");
+            panelMensajes.actualizarMensaje(expendedor.ValorPago());
+
         });
     }
 

@@ -21,7 +21,7 @@ public class PanelComprador extends JPanel {
         this.setLayout(new BorderLayout());
         Comprador = new JLabel(new ImageIcon(getClass().getResource("/Comprador.png")));
         Bolsillo = new PanelBolsillo(comprador,this);
-        Usuario = new PanelUsuario(comprador, Bolsillo);
+        Usuario = new PanelUsuario(comprador, Bolsillo,this);
         Usuario.setPreferredSize(new Dimension(0,150));
         Mano = new JLabel();
 
@@ -29,8 +29,6 @@ public class PanelComprador extends JPanel {
         this.add(Usuario,BorderLayout.SOUTH);
         this.add(Bolsillo,BorderLayout.EAST );
         this.add(Mano,BorderLayout.WEST);
-        
-
 
 }
 

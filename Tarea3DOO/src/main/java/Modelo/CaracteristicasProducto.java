@@ -4,34 +4,34 @@ package Modelo;
  * Enumeración que representa diferentes productos con sus características y métodos asociados.
  */
 public enum CaracteristicasProducto {
-    SPRITE(400) {
-        @Override
-        public Bebida createProducto(int serie) {
-            return new Sprite(serie);
-        }
-    },
-    COCACOLA(450) {
-        @Override
-        public Bebida createProducto(int serie) {
-            return new CocaCola(serie);
-        }
-    },
-    FANTA(500) {
+    FANTA(400) {
         @Override
         public Bebida createProducto(int serie) {
             return new Fanta(serie);
         }
     },
-    SUPER8(800) {
+    SPRITE(700) {
         @Override
-        public Dulce createProducto(int serie) {
-            return new Super8(serie);
+        public Bebida createProducto(int serie) {
+            return new Sprite(serie);
         }
     },
-    SNICKERS(1000) {
+    COCACOLA(500) {
+        @Override
+        public Bebida createProducto(int serie) {
+            return new CocaCola(serie);
+        }
+    },
+    SNICKERS(800) {
         @Override
         public Dulce createProducto(int serie) {
             return new Snicker(serie);
+        }
+    },
+    SUPER8(1000) {
+        @Override
+        public Dulce createProducto(int serie) {
+            return new Super8(serie);
         }
     };
 

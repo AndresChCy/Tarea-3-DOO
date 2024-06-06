@@ -30,7 +30,7 @@ public class PanelExpendedor extends JPanel {
 
         // Inicializar los componentes de la interfaz gráfica del expendedor
         panelMaquina = new PanelMaquina();
-        panelMaquina2 = new PanelMaquina2(expendedor,comprador,com);
+        panelMaquina2 = new PanelMaquina2(expendedor,comprador,com,this);
         panelDepositos = new PanelDepositos(expendedor);
         panelZonaExtraccion = new PanelZonaExtraccion(comprador, expendedor,com);
 

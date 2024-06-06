@@ -30,15 +30,16 @@ public class PanelBotones extends JPanel {
     private PanelMensajes panelMensajes;
     private LogicaBotones logicaBotones;
     private Expendedor expendedor;
+    private PanelExpendedor exp;
 
     /**
      * Constructor de la clase PanelBotones.
      * Inicializa el panel, carga las imágenes de los productos y configura el diseño del panel.
      */
 
-    public PanelBotones(Expendedor expendedor, PanelMensajes panelMensajes) {
+    public PanelBotones(Expendedor expendedor, PanelMensajes panelMensajes,PanelExpendedor exp) {
         this.expendedor = expendedor;
-
+        this.exp = exp;
         // Inicializa el mapa de imágenes
         imagenesBotones = new HashMap<>();
         botonesArray = new JButton[6];
@@ -65,15 +66,6 @@ public class PanelBotones extends JPanel {
         setLayout(new GridLayout(3, 2));
         // Agrega los botones al panel
         agregarBotones();
-        /*String nombreBoton = botones[5];
-        BufferedImage productoImg = imagenesBotones.get(nombreBoton);
-        if (productoImg != null ) {
-            JButton boton = new JButton();
-            boton.addMouseListener(new ConfirmarPago());
-            botonesArray[5] = boton;
-            add(boton);
-        }*/
-
 
         // Añadir un ComponentListener para redimensionar los iconos de los botones al cambiar el tamaño del panel
         this.addComponentListener(new ComponentAdapter() {
@@ -94,7 +86,6 @@ public class PanelBotones extends JPanel {
             BufferedImage productoImg = imagenesBotones.get(nombreBoton);
             if (productoImg != null ) {
                 JButton boton = new JButton();
-                //boton.addMouseListener(new ElegirProducto(i));
                 botonesArray[i] = boton;
                 add(boton);
                 if (i < 5) {
@@ -136,7 +127,7 @@ public class PanelBotones extends JPanel {
         public void actionPerformed(ActionEvent e) {
             cualProducto = cual;
             String mensaje = logicaBotones.verificarProducto(cual);
-            panelMensajes.actualizarMensaje(mensaje);
+            panelMensajes.actualizarMensaje(mensaje );
         }
     }
 
@@ -146,6 +137,8 @@ public class PanelBotones extends JPanel {
                 if (expendedor.getCantidadDepositoExpecial() == 0) {
                     try{
                         expendedor.comprarProducto(cualProducto);
+                        panelMensajes.actualizarMensaje("Compra exitosa! \n Retire el producto");
+                        exp.repaint();
                     } catch (NoHayProductoException ex) {
                         panelMensajes.actualizarMensaje("Producto no disponible :(");
                     } catch (PagoInsuficienteException ex) {
