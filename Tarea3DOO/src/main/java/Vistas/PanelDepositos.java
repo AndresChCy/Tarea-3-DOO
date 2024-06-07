@@ -26,6 +26,7 @@ public class PanelDepositos extends JPanel {
      * @param expendedor El Expendedor asociado al panel.
      */
     public PanelDepositos(Expendedor expendedor) {
+        this.setOpaque(false);
         // Asignar el objeto Expendedor
         this.expendedor = expendedor;
         // Inicializar el mapa de imágenes de productos

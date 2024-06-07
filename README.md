@@ -18,6 +18,7 @@ pero teníamos problemas con las proporciones graficas y se veía feo). De antem
 
 ### Notas del programa
 Aca un par de instrucciones para usar el programa:
+-El código se ejecuta desde el archivo ventana.
 -Apretando las monedas del lado del comprador se le añadira monedas al bolsillo del comprador(Imprime su serie por consola)
 -Si aprietas las monedas de tu bolsillo la puedes añadir a tu mano (Solo tiene una mano porque es Gohan del futuro)
 -Apretando el botón circular verde del expendedor se añadira la moneda en tu mano como pago acumulado, apriete los botones

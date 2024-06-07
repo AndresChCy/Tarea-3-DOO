@@ -5,10 +5,11 @@ import Modelo.Expendedor;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -27,6 +28,7 @@ public class PanelZonaExtraccion extends JPanel {
      * Agrega listeners para manejar los eventos de movimiento y salida del ratón.
      */
     public PanelZonaExtraccion(Comprador comprador, Expendedor expendedor,PanelComprador com) {
+        this.setOpaque(false);
         try {
             // Cargar las imágenes de la máquina abierta y cerrada
             imagenMaquinaCerrada = ImageIO.read(getClass().getResource("/Máquina_Cerrada.png"));
@@ -89,14 +91,42 @@ public class PanelZonaExtraccion extends JPanel {
         // Dibujar la imagen de la máquina actual en el panel
         g.drawImage(imagenMaquinaActual.getScaledInstance(anchoPanel, altoPanel, Image.SCALE_SMOOTH), 0, 0, this);
     }
-    private void actualizarIcono(PanelZonaExtraccion boton, Image imagen,JLabel producto) {
+    /**
+     * Actualiza el icono de un JLabel rotando la imagen 90 grados y escalándola
+     * para ajustarse al tamaño del botón especificado.
+     *
+     * @param boton El botón al cual se ajustará la imagen.
+     * @param imagen La imagen que se rotará y escalará.
+     * @param etiquetaProducto El JLabel cuyo icono se actualizará.
+     */
+    private void actualizarIcono(PanelZonaExtraccion boton, Image imagen, JLabel etiquetaProducto) {
         if (imagen != null) {
             int anchoBoton = boton.getWidth();
             int altoBoton = boton.getHeight();
             if (anchoBoton > 0 && altoBoton > 0) {
-                // Escalar la imagen para que se ajuste al tamaño del botón
-                Image img = imagen.getScaledInstance(anchoBoton, altoBoton, Image.SCALE_SMOOTH);
-                producto.setIcon(new ImageIcon(img));
+                // Convertir la imagen a BufferedImage si no lo es
+                BufferedImage imagenBufferizada;
+                imagenBufferizada = new BufferedImage(imagen.getWidth(null), imagen.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D bGr = imagenBufferizada.createGraphics();
+                bGr.drawImage(imagen, 0, 0, null);
+                bGr.dispose();
+
+                // Rotar la imagen 90 grados
+                int anchoImagen = imagenBufferizada.getWidth();
+                int altoImagen = imagenBufferizada.getHeight();
+                BufferedImage imagenRotada = new BufferedImage(altoImagen, anchoImagen, imagenBufferizada.getType());
+
+                AffineTransform transformacion = new AffineTransform();
+                transformacion.translate(altoImagen / 2.0, anchoImagen / 2.0);
+                transformacion.rotate(Math.toRadians(90));
+                transformacion.translate(-anchoImagen / 2.0, -altoImagen / 2.0);
+
+                AffineTransformOp operacion = new AffineTransformOp(transformacion, AffineTransformOp.TYPE_BILINEAR);
+                operacion.filter(imagenBufferizada, imagenRotada);
+
+                // Escalar la imagen rotada para que se ajuste al tamaño del botón
+                Image imagenEscalada = imagenRotada.getScaledInstance(anchoBoton, altoBoton, Image.SCALE_SMOOTH);
+                etiquetaProducto.setIcon(new ImageIcon(imagenEscalada));
             }
         }
     }
